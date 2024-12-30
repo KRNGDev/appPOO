@@ -1,0 +1,126 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ folder }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{ folder }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card id="card">
+    <div class="profile-container">
+      <ion-avatar class="profile-image">
+        <img
+          src="https://ionicframework.com/docs/img/demos/thumbnail.svg"
+          alt="avatar"
+        />
+      </ion-avatar>
+      <ion-card-header class="profile-header">
+        <div class="cabecera">
+          <div class="texto">
+            <ion-card-title>Disciplina</ion-card-title>
+            <ion-card-subtitle>Curso 2024-25</ion-card-subtitle>
+          </div>
+          <app-grafica-circular [asistencia]="80"></app-grafica-circular>
+        </div>
+        <ion-item [button]="true">
+          <ion-icon name="calendar-outline" slot="start"></ion-icon>
+          <ion-label>
+            <h2>Fecha de pagos</h2>
+          </ion-label>
+        </ion-item>
+      </ion-card-header>
+    </div>
+
+    <ion-card-content>
+      <ion-list>
+        <ion-item
+          [routerLink]="['/lista-alumnos']"
+          routerLinkActive="router-link-active"
+          [button]="true"
+        >
+          <ion-icon
+            color="tertiary"
+            slot="start"
+            name="list-circle"
+            size="large"
+          ></ion-icon>
+          <ion-label>Clase L-X</ion-label>
+          <ion-note slot="end"
+            ><ion-icon size="large" name="arrow-forward-outline"></ion-icon
+          ></ion-note>
+        </ion-item>
+
+        <ion-item
+          [routerLink]="['/lista-alumnos']"
+          routerLinkActive="router-link-active"
+          [button]="true"
+        >
+          <ion-icon
+            color="danger"
+            slot="start"
+            name="list-circle"
+            size="large"
+          ></ion-icon>
+          <ion-label>Clase V</ion-label>
+          <ion-note slot="end"
+            ><ion-icon size="large" name="arrow-forward-outline"></ion-icon>
+          </ion-note>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card
+    [routerLink]="['/estadistcas']"
+    routerLinkActive="router-link-active"
+    [button]="true"
+  >
+    <ion-card-header>
+      <ion-card-title>Graficas</ion-card-title>
+      <ion-card-subtitle>ultimo mes</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <apx-chart
+        [series]="chartOptions.series"
+        [chart]="chartOptions.chart"
+        [xaxis]="chartOptions.xaxis"
+        [dataLabels]="chartOptions.dataLabels"
+        [grid]="chartOptions.grid"
+        [stroke]="chartOptions.stroke"
+        [title]="chartOptions.title"
+      ></apx-chart>
+
+      <apx-chart
+        [series]="barrasOptions.series"
+        [chart]="barrasOptions.chart"
+        [colors]="barrasOptions.colors"
+        [plotOptions]="barrasOptions.plotOptions"
+        [dataLabels]="barrasOptions.dataLabels"
+        [xaxis]="barrasOptions.xaxis"
+        [yaxis]="barrasOptions.yaxis"
+        [title]="barrasOptions.title"
+      ></apx-chart>
+    </ion-card-content>
+  </ion-card>
+
+  <app-listado></app-listado>
+
+  <strong class="capitalize">{{ folder }}</strong>
+  <p>
+    Explore
+    <a
+      target="_blank"
+      rel="noopener noreferrer"
+      href="https://ionicframework.com/docs/components"
+      >UI Components</a
+    >
+  </p>
+</ion-content>

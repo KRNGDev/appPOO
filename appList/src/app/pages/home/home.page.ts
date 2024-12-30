@@ -1,8 +1,11 @@
 import { Component, inject, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import {IonItem,IonCard ,IonThumbnail,IonCardContent,IonCardHeader,IonCardSubtitle,IonCardTitle,  IonIcon,IonNote, IonList,IonLabel, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent } from '@ionic/angular/standalone';
+import { ActivatedRoute,RouterLink, RouterLinkActive } from '@angular/router';
+import{ListadoComponent} from 'src/app/componente/listado/listado.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import {IonAvatar,IonItem,IonCard ,IonThumbnail,IonCardContent,IonCardHeader,IonCardSubtitle,IonCardTitle,IonIcon,IonNote, IonList,IonLabel, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { library, playCircle, radio, search, pin,listCircle, arrowForwardOutline, share, trash } from 'ionicons/icons';
+import { library,  playCircle, radio, search, pin,listCircle, arrowForwardOutline, share, trash, calendarOutline } from 'ionicons/icons';
 import{NgApexchartsModule} from  'ng-apexcharts';
 import {
   ChartComponent,
@@ -17,7 +20,7 @@ import {
   ApexFill,
   ApexGrid
 } from "ng-apexcharts";
-import {MatCardModule} from '@angular/material/card';
+import { GraficaCircularComponent } from 'src/app/componente/grafica-circular/grafica-circular.component';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -47,12 +50,13 @@ export type circuleOptions = {
 };
 
 @Component({
-  selector: 'app-folder',
-  templateUrl: './folder.page.html',
-  styleUrls: ['./folder.page.scss'],
-  imports: [IonHeader,IonThumbnail ,MatCardModule, IonCard,IonCardContent,IonCardHeader,IonCardSubtitle,IonCardTitle,NgApexchartsModule, IonIcon, IonNote, IonList,IonLabel, IonItem, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent],
+  selector: 'app-home',
+  templateUrl: './home.page.html',
+  styleUrls: ['./home.page.scss'],
+  standalone: true,
+  imports: [ListadoComponent, IonAvatar, RouterLink, RouterLinkActive, IonContent,GraficaCircularComponent,NgApexchartsModule, IonItem,IonCard ,IonThumbnail,IonCardContent,IonCardHeader,IonCardSubtitle,IonCardTitle,IonIcon,IonNote, IonList,IonLabel, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
-export class FolderPage implements OnInit {
+export class HomePage implements OnInit {
   public folder!: string;
   private activatedRoute = inject(ActivatedRoute);
   @ViewChild("chart") chart: ChartComponent = new ChartComponent;
@@ -62,7 +66,7 @@ export class FolderPage implements OnInit {
 
 
   constructor() {
-    addIcons({ library, playCircle, radio, search, pin,listCircle,arrowForwardOutline, share, trash });
+    addIcons({calendarOutline,listCircle,arrowForwardOutline,library,playCircle,radio,search,pin,share,trash});
     this.chartOptions = {
       series: [
         {
@@ -141,11 +145,7 @@ export class FolderPage implements OnInit {
         }
       },
       dataLabels: {
-        enabled: false,
-        formatter: function(val, opt) {
-          return opt.w.globals.labels[opt.dataPointIndex] + ":  " + val;
-        }
-        
+        enabled: false,        
       },
       xaxis: {
         categories: [
@@ -225,11 +225,9 @@ export class FolderPage implements OnInit {
         }
       },
       labels: ["Asistiencia"]
-    };    
-  }
-
-  listAlumnos() {
+    };
     
+
   }
 
   ngOnInit() {

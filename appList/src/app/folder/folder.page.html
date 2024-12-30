@@ -7,43 +7,113 @@
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">{{ folder }}</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-content color="light">
-    <ion-list [inset]="true">
-      <ion-item>
-        <ion-avatar aria-hidden="true" slot="start">
-          <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-        </ion-avatar>
-        <ion-label>Huey</ion-label>
-      </ion-item>
-      <ion-item [button]="true">
-        <ion-icon color="danger" slot="start" name="list-circle" size="large"></ion-icon>
-        <ion-label>General</ion-label>
-        <ion-note slot="end">6</ion-note>
-      </ion-item>
-      <ion-item>
-        <ion-label>Mega Man X</ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>The Legend of Zelda</ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>Pac-Man</ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>Super Mario World</ion-label>
-      </ion-item>
-    </ion-list>
-  </ion-content>
 
-  <div id="container">
-    
-    <strong class="capitalize">{{ folder }}</strong>
-    <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+
+
+  <mat-card class="example-card" appearance="outlined"></mat-card>
+
+  <ion-card id="card">
+    <mat-card-header>
+      <mat-card-title-group>
+        <ion-card-header>
+          <ion-card-title>Kenjutsu</ion-card-title>
+          <ion-card-subtitle>Curso 2024-25</ion-card-subtitle>
+          <div id="chart">
+            <apx-chart [series]="circleOptions.series" [chart]="circleOptions.chart"
+              [plotOptions]="circleOptions.plotOptions" [labels]="circleOptions.labels"  [fill]="circleOptions.fill"></apx-chart>
+          </div>
+        </ion-card-header>
+        <img mat-card-lg-image src="https://ionicframework.com/docs/img/demos/thumbnail.svg">
+      </mat-card-title-group>
+    </mat-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item [button]="true" >
+          <ion-icon color="tertiary" slot="start" name="list-circle" size="large"></ion-icon>
+          <ion-label>Clase L-X</ion-label>
+          <ion-note slot="end"><ion-icon size="large" name="arrow-forward-outline"></ion-icon></ion-note>
+        </ion-item>
+
+        <ion-item [button]="true">
+          <ion-icon color="danger" slot="start" name="list-circle" size="large"></ion-icon>
+          <ion-label>Clase V</ion-label>
+          <ion-note slot="end"><ion-icon size="large" name="arrow-forward-outline"></ion-icon>
+          </ion-note>
+        </ion-item>
+
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card >
+    <ion-card-header>
+      <ion-card-title>Listado Alumnos</ion-card-title>
+      <ion-card-subtitle>ultimas asistencias</ion-card-subtitle>
+    </ion-card-header>
+
+
+    <ion-card-content>
+
+      <ion-list>
+        <ion-item [button]="true">
+          <ion-thumbnail slot="start">
+            <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-thumbnail>
+          <ion-label>Item</ion-label>
+        </ion-item>
+
+        <ion-item [button]="true">
+          <ion-thumbnail slot="start">
+            <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-thumbnail>
+          <ion-label>Item</ion-label>
+        </ion-item>
+
+        <ion-item [button]="true">
+          <ion-thumbnail slot="start">
+            <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-thumbnail>
+          <ion-label>Item</ion-label>
+        </ion-item>
+
+        <ion-item [button]="true" lines="none">
+          <ion-thumbnail slot="start">
+            <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-thumbnail>
+          <ion-label>Item</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Graficas</ion-card-title>
+      <ion-card-subtitle>ultimo mes</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [xaxis]="chartOptions.xaxis"
+        [dataLabels]="chartOptions.dataLabels" [grid]="chartOptions.grid" [stroke]="chartOptions.stroke"
+        [title]="chartOptions.title"></apx-chart>
+
+      <apx-chart [series]="barrasOptions.series" [chart]="barrasOptions.chart" [colors]="barrasOptions.colors"
+        [plotOptions]="barrasOptions.plotOptions" [dataLabels]="barrasOptions.dataLabels" [xaxis]="barrasOptions.xaxis"
+        [yaxis]="barrasOptions.yaxis" [title]="barrasOptions.title"></apx-chart>
+    </ion-card-content>
+  </ion-card>
+
+
+  <strong class="capitalize">{{ folder }}</strong>
+  <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI
+      Components</a></p>
+
+
+
 </ion-content>

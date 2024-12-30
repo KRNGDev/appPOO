@@ -3,7 +3,10 @@
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
         <ion-list id="inbox-list">
-          <ion-list-header>Inbox</ion-list-header>
+          <ion-avatar class="profile-image">
+            <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="avatar">
+          </ion-avatar>
+          <ion-list-header>Nombre</ion-list-header>
           <ion-note>hi&#64;ionicframework.com</ion-note>
 
           @for (p of appPages; track p; let i = $index) {
