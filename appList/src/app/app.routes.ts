@@ -12,7 +12,7 @@ export const routes: Routes = [
       import('./folder/folder.page').then((m) => m.FolderPage),
   },
   {
-    path: 'lista-alumnos',
+    path: 'lista-alumnos/:id',
     loadComponent: () => import('./pages/lista-alumnos/lista-alumnos.page').then( m => m.ListaAlumnosPage)
   },
   {

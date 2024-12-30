@@ -42,7 +42,7 @@
     <ion-card-content>
       <ion-list>
         <ion-item
-          [routerLink]="['/lista-alumnos']"
+          [routerLink]="['/lista-alumnos/Clase L-X']"
           routerLinkActive="router-link-active"
           [button]="true"
         >
@@ -59,7 +59,7 @@
         </ion-item>
 
         <ion-item
-          [routerLink]="['/lista-alumnos']"
+          [routerLink]="['/lista-alumnos/Clase V']"
           routerLinkActive="router-link-active"
           [button]="true"
         >
@@ -88,26 +88,8 @@
       <ion-card-subtitle>ultimo mes</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-      <apx-chart
-        [series]="chartOptions.series"
-        [chart]="chartOptions.chart"
-        [xaxis]="chartOptions.xaxis"
-        [dataLabels]="chartOptions.dataLabels"
-        [grid]="chartOptions.grid"
-        [stroke]="chartOptions.stroke"
-        [title]="chartOptions.title"
-      ></apx-chart>
-
-      <apx-chart
-        [series]="barrasOptions.series"
-        [chart]="barrasOptions.chart"
-        [colors]="barrasOptions.colors"
-        [plotOptions]="barrasOptions.plotOptions"
-        [dataLabels]="barrasOptions.dataLabels"
-        [xaxis]="barrasOptions.xaxis"
-        [yaxis]="barrasOptions.yaxis"
-        [title]="barrasOptions.title"
-      ></apx-chart>
+      <app-grafica-barras></app-grafica-barras>
+      <app-grafica-lineal></app-grafica-lineal>
     </ion-card-content>
   </ion-card>
 

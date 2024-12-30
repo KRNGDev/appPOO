@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {IonItem,IonAvatar,IonNote, IonCard,IonSelect,IonList,IonLabel,IonSelectOption,IonInput,IonButton, IonContent,IonMenuButton,IonIcon, IonBackButton,IonButtons, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import {IonItem,IonAvatar,IonNote, IonSelect,IonList,IonLabel,IonSelectOption, IonContent,IonMenuButton,IonIcon, IonButtons, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { library, playCircle, radio, search, searchOutline,closeCircle, checkmarkCircle } from 'ionicons/icons';
-import{ListadoComponent} from 'src/app/componente/listado/listado.component';
-
 import { Alumno } from 'src/app/interface/alumno';
 import { AlumnoService } from 'src/app/service/alumnoService/alumno.service';
 
@@ -16,14 +14,18 @@ import { AlumnoService } from 'src/app/service/alumnoService/alumno.service';
   templateUrl: './lista-alumnos.page.html',
   styleUrls: ['./lista-alumnos.page.scss'],
   standalone: true,
-  imports: [ ListadoComponent, IonAvatar,IonNote, IonCard,  IonList,IonSelect, IonSelectOption, IonLabel, IonButton, IonInput, IonItem, RouterLink, RouterLinkActive, IonContent,IonMenuButton , IonIcon, IonBackButton, IonButtons,  IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [ IonAvatar,IonNote, IonList,IonSelect, IonSelectOption, IonLabel,   IonItem, RouterLink, RouterLinkActive, IonContent,IonMenuButton , IonIcon,  IonButtons,  IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  
 })
 export class ListaAlumnosPage implements OnInit{
+  titulo: string = '';
   selectedOrder: string = 'ascendente';
   alumnos: Alumno[]= [ ];
+  
 
-  constructor(private alumnoService: AlumnoService) { 
+  constructor(private alumnoService: AlumnoService, private activatedRoute: ActivatedRoute) { 
     addIcons({checkmarkCircle, closeCircle,searchOutline,playCircle,radio,library,search});
+  
   }
   
 
@@ -51,6 +53,7 @@ export class ListaAlumnosPage implements OnInit{
 
   ngOnInit(): void {
       this.alumnos = this.alumnoService.getAlumnos();
+      this.titulo = this.activatedRoute.snapshot.paramMap.get('id') as string;
   }
 
 }

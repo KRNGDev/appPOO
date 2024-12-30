@@ -14,5 +14,54 @@
     </ion-toolbar>
   </ion-header>
 
+  <ion-card class="busqueda">
+    <ion-item>
+      <ion-select
+        required="true"
+        label-placement="floating"
+        label="Tipo de Estadistica"
+        placeholder="Selecciona un tipo de Estadistica"
+        [value]="mostrando"
+        (ionChange)="mostrar($event)"
+      >
+        <ion-select-option value="graficaBarras">Asistencia</ion-select-option>
+        <ion-select-option value="graficaLineal">Pagos</ion-select-option>
+        <ion-select-option value="graficaArea">Beneficios</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <div class="fecha">
+      <ion-item>
+        <ion-input
+          required="true"
+          label-placement="floating"
+          type="date"
+          label="Desde"
+          placeholder="Fecha desde la que quieres ver los datos"
+          name="Fecha de inicio"
+        ></ion-input>
+      </ion-item>
 
- </ion-content>
+      <ion-item>
+      <ion-input
+        required="true"
+        label-placement="floating"
+        type="date"
+        label="Hasta"
+        placeholder="Fecha hasta la que quieres ver los datos"
+        name="Fecha fin"
+        [value]="today | date:'yyyy-MM-dd'"
+      ></ion-input>
+      </ion-item>
+    </div>
+  </ion-card>
+
+  <ion-card *ngIf="mostrando === 'graficaLineal'" class="grafica">
+    <app-grafica-lineal  ></app-grafica-lineal>
+  </ion-card>
+  <ion-card *ngIf="mostrando === 'graficaBarras'" class="grafica">
+    <app-grafica-barras ></app-grafica-barras>    
+  </ion-card>
+  <ion-card *ngIf="mostrando === 'graficaArea'" class="grafica">
+    <app-grafica-area ></app-grafica-area>    
+  </ion-card>
+</ion-content>

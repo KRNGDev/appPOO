@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonList, IonListHeader, IonCardSubtitle, IonItem, IonCardTitle, IonCardHeader, IonCardContent, IonCard, IonLabel, IonAvatar, IonChip, IonButtons, IonIcon, IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonInput,IonList, IonCardSubtitle, IonItem, IonCardTitle, IonCardHeader, IonCardContent, IonCard, IonLabel, IonAvatar, IonChip, IonButtons, IonIcon, IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { arrowBackOutline, callOutline, mailOutline, personOutline, calendarOutline, locationOutline, schoolOutline, timeOutline, cashOutline } from 'ionicons/icons';
 import { GraficaCircularComponent } from 'src/app/componente/grafica-circular/grafica-circular.component';
@@ -14,7 +14,7 @@ import { AlumnoService } from 'src/app/service/alumnoService/alumno.service';
   templateUrl: './ficha-alumno.page.html',
   styleUrls: ['./ficha-alumno.page.scss'],
   standalone: true,
-  imports: [IonContent, IonList, IonListHeader, GraficaCircularComponent, IonCardSubtitle, IonItem, IonCardTitle, IonCardHeader, IonCardContent, IonCard, IonLabel, IonAvatar, IonChip, IonIcon, IonButtons, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonContent, IonInput, IonList,  GraficaCircularComponent, IonCardSubtitle, IonItem, IonCardTitle, IonCardHeader, IonCardContent, IonCard, IonLabel, IonAvatar, IonChip, IonIcon, IonButtons, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 
 

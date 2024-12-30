@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">AppGym</string>
+    <string name="title_activity_main">AppGym</string>
+    <string name="package_name">com.krngdev.appgym</string>
+    <string name="custom_url_scheme">com.krngdev.appgym</string>
+</resources>

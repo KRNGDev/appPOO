@@ -2,6 +2,7 @@ ion-menu ion-content {
   --background: var(--ion-item-background, var(--ion-background-color, #fff));
 }
 
+
 ion-menu.md ion-content {
   --padding-start: 8px;
   --padding-end: 8px;
@@ -120,4 +121,10 @@ ion-item.selected {
 ion-title {
   font-size: 1.5rem;
   font-weight: bold;
+}
+@media screen and (min-width: 768px) {
+  ion-menu{
+    width:220px;
+  }
+  
 }

@@ -15,6 +15,7 @@ export type circuleOptions = {
   labels: string[];
   plotOptions: ApexPlotOptions;
   fill: ApexFill;
+  colors: string[];
 };
 @Component({
   selector: 'app-grafica-circular',
@@ -26,6 +27,7 @@ export type circuleOptions = {
 export class GraficaCircularComponent implements OnChanges {
  @ViewChild("chart") chart: ChartComponent = new ChartComponent;
  @Input() asistencia: number= 0;
+ color:string[] = [ ];
 
   public circleOptions: circuleOptions;
   constructor() {    
@@ -39,6 +41,7 @@ export class GraficaCircularComponent implements OnChanges {
         width: 110,
         
       },
+      colors: this.color,
       
       plotOptions: {
         radialBar: {
@@ -63,6 +66,7 @@ export class GraficaCircularComponent implements OnChanges {
             name: {
               show: true,
               fontSize:"15px",
+              color: "#333",
               offsetY: 40,
             },
             value: {
@@ -76,21 +80,28 @@ export class GraficaCircularComponent implements OnChanges {
         type: "gradient",
         gradient: {
           shade: "light",
-          shadeIntensity: 0.4,
+          shadeIntensity: 1,
+        
           inverseColors: false,
           opacityFrom: 1,
           opacityTo: 1,
-          stops: [0, 50, 53, 91]
+          stops: [0, 100]
         }
       },
       labels: ["Asistiencia"]
     };
     
    }
-
+   private cambiarColor(): string[] {
+    console.log(this.asistencia);
+    return this.asistencia >= 50 ? ["#20E647"] : ["#E40000"];
+  }
    ngOnChanges(changes: SimpleChanges): void {
     if (changes['asistencia']) {      
       this.circleOptions.series = [this.asistencia];
+      this.color = this.cambiarColor();
+      this.circleOptions.colors = this.color;
+      console.log(this.color);
     }
   }
 
