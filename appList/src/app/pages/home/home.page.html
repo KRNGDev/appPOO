@@ -17,10 +17,7 @@
   <ion-card id="card">
     <div class="profile-container">
       <ion-avatar class="profile-image">
-        <img
-          src="https://ionicframework.com/docs/img/demos/thumbnail.svg"
-          alt="avatar"
-        />
+        <img src="https://ionicframework.com/docs/img/demos/thumbnail.svg" alt="avatar" />
       </ion-avatar>
       <ion-card-header class="profile-header">
         <div class="cabecera">
@@ -33,7 +30,7 @@
         <ion-item [button]="true">
           <ion-icon name="calendar-outline" slot="start"></ion-icon>
           <ion-label>
-            <h2>Fecha de pagos</h2>
+            <h2>Lista de pagos</h2>
           </ion-label>
         </ion-item>
       </ion-card-header>
@@ -41,48 +38,23 @@
 
     <ion-card-content>
       <ion-list>
-        <ion-item
-          [routerLink]="['/lista-alumnos/Clase L-X']"
-          routerLinkActive="router-link-active"
-          [button]="true"
-        >
-          <ion-icon
-            color="tertiary"
-            slot="start"
-            name="list-circle"
-            size="large"
-          ></ion-icon>
+        <ion-item [routerLink]="['/lista-alumnos/Clase L-X']" routerLinkActive="router-link-active" [button]="true">
+          <ion-icon color="tertiary" slot="start" name="list-circle" size="large"></ion-icon>
           <ion-label>Clase L-X</ion-label>
-          <ion-note slot="end"
-            ><ion-icon size="large" name="arrow-forward-outline"></ion-icon
-          ></ion-note>
+          <ion-note slot="end"><ion-icon size="large" name="arrow-forward-outline"></ion-icon></ion-note>
         </ion-item>
 
-        <ion-item
-          [routerLink]="['/lista-alumnos/Clase V']"
-          routerLinkActive="router-link-active"
-          [button]="true"
-        >
-          <ion-icon
-            color="danger"
-            slot="start"
-            name="list-circle"
-            size="large"
-          ></ion-icon>
+        <ion-item [routerLink]="['/lista-alumnos/Clase V']" routerLinkActive="router-link-active" [button]="true">
+          <ion-icon color="danger" slot="start" name="list-circle" size="large"></ion-icon>
           <ion-label>Clase V</ion-label>
-          <ion-note slot="end"
-            ><ion-icon size="large" name="arrow-forward-outline"></ion-icon>
+          <ion-note slot="end"><ion-icon size="large" name="arrow-forward-outline"></ion-icon>
           </ion-note>
         </ion-item>
       </ion-list>
     </ion-card-content>
   </ion-card>
 
-  <ion-card
-    [routerLink]="['/estadistcas']"
-    routerLinkActive="router-link-active"
-    [button]="true"
-  >
+  <ion-card [routerLink]="['/estadistcas']" routerLinkActive="router-link-active" [button]="true">
     <ion-card-header>
       <ion-card-title>Graficas</ion-card-title>
       <ion-card-subtitle>ultimo mes</ion-card-subtitle>
@@ -98,11 +70,6 @@
   <strong class="capitalize">{{ folder }}</strong>
   <p>
     Explore
-    <a
-      target="_blank"
-      rel="noopener noreferrer"
-      href="https://ionicframework.com/docs/components"
-      >UI Components</a
-    >
+    <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a>
   </p>
 </ion-content>

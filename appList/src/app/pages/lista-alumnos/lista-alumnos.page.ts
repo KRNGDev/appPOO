@@ -43,10 +43,10 @@ export class ListaAlumnosPage implements OnInit{
         this.alumnos.sort((a, b) => b.asistencia - a.asistencia);
         break;
       case 'pagado':
-        this.alumnos.sort((a, b) => Number(b.pago) - Number(a.pago));
+        this.alumnos.sort((a, b) => Number(b.mca_pago) - Number(a.mca_pago));
         break;
       case 'noPagado':
-        this.alumnos.sort((a, b) => Number(a.pago) - Number(b.pago));
+        this.alumnos.sort((a, b) => Number(a.mca_pago) - Number(b.mca_pago));
         break;
     }
   }

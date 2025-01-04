@@ -1,4 +1,4 @@
-import { Component,inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonCard,IonInput,IonSelectOption,IonSelect,IonItem,IonContent, IonHeader,IonToolbar,IonButtons, IonMenuButton, IonTitle} from '@ionic/angular/standalone';
@@ -27,7 +27,7 @@ export class EstadistcasPage implements OnInit {
    }
    
   ngOnInit() {
-    this.today = new Date().toISOString().split('T')[0];;
+    this.today = new Date().toISOString().split('T')[0];
     console.log(this.today);
   }
 

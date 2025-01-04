@@ -1,0 +1,105 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Registro</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <form>
+    
+      <!-- Nombre -->
+      <ion-item>
+        <ion-input
+        class="ion-text-capitalize"
+          required="true"
+          label-placement="floating"
+          label="Nombre"
+          type="text"
+          placeholder="Introduce tu nombre"
+         
+          name="nombre"
+        ></ion-input>
+      </ion-item>
+      <!-- Apellidos -->
+      <ion-item>
+        <ion-input
+        class="ion-text-capitalize"
+        autocorrect="on"
+          required="true"
+          label-placement="floating"
+          label="Apellidos"
+          type="text"
+          placeholder="Introduce tus apellidos"
+        
+          name="apellidos"
+        ></ion-input>
+      </ion-item>
+       <!-- Fecha de nacimiento -->
+       <ion-item>
+        <ion-input
+          required="true"
+          label-placement="floating"
+          type="date"
+          label="Fecha de nacimiento"
+          placeholder="Introduce tu Fecha de nacimiento"
+        
+          name="Fecha de nacimiento"
+        ></ion-input>
+      </ion-item>
+
+      <!-- Email -->
+      <ion-item>
+        <ion-input
+          required="true"
+          label-placement="floating"
+          label="Email"
+          type="email"
+          placeholder="Introduce tu email"
+          
+          name="email"
+        ></ion-input>
+      </ion-item>
+
+    
+      <!-- Telefono -->
+      <ion-item>
+        <ion-input       
+          required="true"
+          label-placement="floating"
+          label="Telefono"
+          type="number"
+          placeholder="Introduce tu Telefono"
+          
+          name="telefono"
+        ></ion-input>
+      </ion-item>
+
+      <!-- Foto -->
+      <ion-item>
+       
+
+        <ion-button color="secondary" expand="block" 
+          >Subir Foto</ion-button
+        >
+      </ion-item>
+      <!-- Botón de Enviar -->
+      <ion-button
+       
+        type="submit"
+        expand="block"
+        color="success"
+        shape="round"
+        >Registrar</ion-button
+      >
+    
+  </form>
+</ion-content>

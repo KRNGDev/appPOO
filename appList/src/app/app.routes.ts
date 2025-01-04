@@ -27,4 +27,12 @@ export const routes: Routes = [
     path: 'ficha-alumno/:id',
     loadComponent: () => import('./pages/ficha-alumno/ficha-alumno.page').then( m => m.FichaAlumnoPage)
   },
+  {
+    path: 'registro',
+    loadComponent: () => import('./pages/registro/registro.page').then( m => m.RegistroPage)
+  },
+  {
+    path: 'registro-alumno',
+    loadComponent: () => import('./pages/registro-alumno/registro-alumno.page').then( m => m.RegistroAlumnoPage)
+  },
 ];

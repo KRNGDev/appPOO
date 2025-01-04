@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()">Cancel</ion-button>
+    </ion-buttons>
+    <ion-title>Registro Pago</ion-title>
+    
+  </ion-toolbar>
+</ion-header>
+    <ion-content class="ion-padding">
+      
+    <form >
+      
+      <ion-item>
+        <ion-input
+        required="true"
+        label-placement="floating"
+        type="date"
+        label="Fecha Pago"
+        placeholder="Fecha del pago"
+        name="FechaPago"        
+        [(ngModel)]="pago.fecha"
+        [value]="today"
+      ></ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label required="true" position="floating">Cantidad</ion-label>
+        <ion-input type="number"  name="cantidad"  [(ngModel)]="pago.cantidad"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-select required="true"  [(ngModel)]="pago.medio_pago" label-placement="floating" label="Forma de pago" name="forma_pago" placeholder="Forma de Pago">
+          <ion-select-option value="efectivo">Efectivo</ion-select-option>
+          <ion-select-option value="tarjeta">Tarjeta</ion-select-option>
+          <ion-select-option value="transferencia">Transferencia</ion-select-option>
+        </ion-select>
+      </ion-item>
+      
+      <ion-item>
+        <ion-input type="number" name="id_alumno" [(ngModel)]="pago.id_alumno" [value]="id_alumno"></ion-input>
+      </ion-item>
+      <ion-button expand="full" type="submit" (click)="submitPago(pago)">Registrar Pago</ion-button>
+    </form>
+    </ion-content>

@@ -1,148 +1,150 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons (click)="pagAtras()" slot="start">
-      <ion-icon name="arrow-back-outline" size="large"></ion-icon>
-    </ion-buttons>
-    <ion-title>Nombre Alumno</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+<div class="ion-page">
+  <ion-header [translucent]="true">
     <ion-toolbar>
-      <ion-title size="large">fichaAlumno</ion-title>
+      <ion-buttons (click)="pagAtras()" slot="start">
+        <ion-icon name="arrow-back-outline" size="large"></ion-icon>
+      </ion-buttons>
+      <ion-title>Ficha Alumno</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <div class="profile-container">
-    <ion-avatar class="profile-image">
-      <img
-        src="https://ionicframework.com/docs/img/demos/thumbnail.svg"
-        alt="avatar"
-      />
-    </ion-avatar>
-    <ion-card-header class="profile-header">
-      <div class="cabecera">
-        <div class="texto">
-          <ion-card-title>{{getAlumno()?.name}}</ion-card-title>
-          <ion-card-subtitle>Shodan</ion-card-subtitle>
+  <ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+      <ion-toolbar>
+        <ion-title size="large">fichaAlumno</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <div class="profile-container">
+      <ion-avatar class="profile-image">
+        <img [src]="getAlumno()?.imagen" alt="avatar" />
+      </ion-avatar>
+      <ion-card-header class="profile-header">
+        <div class="cabecera">
+          <div class="texto">
+            <ion-card-title
+              >{{getAlumno()?.name}} {{getAlumno()?.apellido}}
+            </ion-card-title>
+            <ion-card-subtitle>Shodan</ion-card-subtitle>
+          </div>
+          <app-grafica-circular
+            *ngIf="getAlumno()"
+            [asistencia]="getAlumno()?.asistencia??0"
+          ></app-grafica-circular>
         </div>
-        <app-grafica-circular *ngIf="getAlumno()"
-        [asistencia]="getAlumno()?.asistencia??0"></app-grafica-circular>
-      </div>
-      <ion-item [button]="true">
-        <ion-icon name="calendar-outline" slot="start"></ion-icon>
-        <ion-label>
-          <h2>Fecha de pagos</h2>
-        </ion-label>
-      </ion-item>
-    </ion-card-header>
-  </div>
+        <ion-item [button]="true" (click)="presentModal()" expand="block">
+          <ion-icon name="calendar-outline" slot="start"></ion-icon>
+          <ion-label [color]="getAlumno()?.mca_pago? 'success' :'danger'">
+            {{getAlumno()?.mca_pago? 'Pagado' :'No pagado'}}
+          </ion-label>
+        </ion-item>
+      </ion-card-header>
+    </div>
 
-  <ion-item>
-    <ion-list class="datos">
-      <ion-item>
-        <ion-icon name="calendar-outline" slot="start"></ion-icon>
-        <ion-label>
-          <h4>Fecha Ingreso</h4>
-          <p>15/09/2006</p>
-        </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-icon name="time-outline" slot="start"></ion-icon>
-        <ion-label>
-          <h4>Estado</h4>
-          <p>Activo</p>
-        </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-icon name="school-outline" slot="start"></ion-icon>
-        <ion-label>
-          <h4>Clase</h4>
-          <p>Clase L-X</p>
-        </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-icon name="time-outline" slot="start"></ion-icon>
-        <ion-label>
-          <h4>Total Dias</h4>
-          <p>150</p>
-        </ion-label>
-      </ion-item>
-            
-    </ion-list>
-    
-  </ion-item>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Información de contacto</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <div class="grid-container">
+    <ion-item>
+      <ion-list class="datos">
         <ion-item>
-          <ion-icon name="call-outline" slot="start"></ion-icon>
+          <ion-icon name="calendar-outline" slot="start"></ion-icon>
           <ion-label>
-            <h2>Numero de telefono</h2>
-            <a [href]="'tel:' +661678301">6666666</a>
+            <h4>Fecha Ingreso</h4>
+            <p>15/09/2006</p>
           </ion-label>
         </ion-item>
         <ion-item>
-          <ion-icon name="mail-outline" slot="start"></ion-icon>
+          <ion-icon name="time-outline" slot="start"></ion-icon>
           <ion-label>
-            <h2>Email</h2>
-            <a [href]="'mailto: paki@gamil.com'">paco&#64;gmail.com</a>
+            <h4>Estado</h4>
+            <p>Activo</p>
           </ion-label>
         </ion-item>
-      </div>
-    </ion-card-content>
-  </ion-card>
+        <ion-item>
+          <ion-icon name="school-outline" slot="start"></ion-icon>
+          <ion-label>
+            <h4>Clase</h4>
+            <p>Clase L-X</p>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="time-outline" slot="start"></ion-icon>
+          <ion-label>
+            <h4>Total Dias</h4>
+            <p>150</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-item>
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Información Pagos</ion-card-title>
-    </ion-card-header>
-   
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Información de contacto</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="grid-container">
+          <ion-item>
+            <ion-icon name="call-outline" slot="start"></ion-icon>
+            <ion-label>
+              <h2>Numero de telefono</h2>
+              <a [href]="'tel:' +661678301">6666666</a>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="mail-outline" slot="start"></ion-icon>
+            <ion-label>
+              <h2>Email</h2>
+              <a [href]="'mailto: paki@gamil.com'">paco&#64;gmail.com</a>
+            </ion-label>
+          </ion-item>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Información Pagos</ion-card-title>
+      </ion-card-header>
+
       <ion-list class="datos">
         <ion-item>
           <ion-icon name="calendar-outline" slot="start"></ion-icon>
           <ion-label>
             <h4>Estado pagos</h4>
-            <ion-label color="success">Al dia</ion-label>
+            <ion-label [color]="getAlumno()?.mca_pago? 'success' :'danger'"
+              >{{getAlumno()?.mca_pago? 'Al dia' :'No pagado'}}</ion-label
+            >
           </ion-label>
         </ion-item>
         <ion-item>
           <ion-icon name="time-outline" slot="start"></ion-icon>
           <ion-label>
             <h4>Último pago</h4>
-            <ion-label >20/12/2022</ion-label>
+            <ion-label>20/12/2022</ion-label>
           </ion-label>
         </ion-item>
-       
       </ion-list>
-    
-  </ion-card>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Logros y Desempeños</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <div class="grid-container">
-        <ion-item>
-          <ion-icon name="call-outline" slot="start"></ion-icon>
-          <ion-label>
-            <h2>Numero de telefono</h2>
-            <a [href]="'tel:' +661678301">6666666</a>
-          </ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-icon name="mail-outline" slot="start"></ion-icon>
-          <ion-label>
-            <h2>Email</h2>
-            <a [href]="'mailto: paki@gamil.com'">paco&#64;gmail.com</a>
-          </ion-label>
-        </ion-item>
-      </div>
-    </ion-card-content>
-  </ion-card>
-</ion-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Logros y Desempeños</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="grid-container">
+          <ion-item>
+            <ion-icon name="call-outline" slot="start"></ion-icon>
+            <ion-label>
+              <h2>Numero de telefono</h2>
+              <a [href]="'tel:' +661678301">6666666</a>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="mail-outline" slot="start"></ion-icon>
+            <ion-label>
+              <h2>Email</h2>
+              <a [href]="'mailto: paki@gamil.com'">paco&#64;gmail.com</a>
+            </ion-label>
+          </ion-item>
+        </div>
+      </ion-card-content>
+    </ion-card>
+      <app-modal-form-pago (id_alumno)="getAlumno()?.id"></app-modal-form-pago>
+  </ion-content>
+</div>
