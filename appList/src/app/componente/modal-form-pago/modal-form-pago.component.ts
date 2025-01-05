@@ -36,7 +36,9 @@ export class ModalFormPagoComponent  implements OnInit {
       buttons: [
         {
           text: 'Si',
-          role: 'confirm',
+          handler: () => {
+          this.cancel();
+          }
         },
         {
           text: 'No',

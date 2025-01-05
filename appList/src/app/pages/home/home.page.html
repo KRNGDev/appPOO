@@ -22,12 +22,12 @@
       <ion-card-header class="profile-header">
         <div class="cabecera">
           <div class="texto">
-            <ion-card-title>Disciplina</ion-card-title>
-            <ion-card-subtitle>Curso 2024-25</ion-card-subtitle>
+            <ion-card-title>{{getDisciplina().nombre}}</ion-card-title>
+            <ion-card-subtitle>Curso {{getCurso().anioInicio}}-{{getCurso().anioFin}}</ion-card-subtitle>
           </div>
           <app-grafica-circular [asistencia]="80"></app-grafica-circular>
         </div>
-        <ion-item [button]="true">
+        <ion-item [button]="true" (click)="listTotalPagos()">
           <ion-icon name="calendar-outline" slot="start"></ion-icon>
           <ion-label>
             <h2>Lista de pagos</h2>
@@ -38,18 +38,12 @@
 
     <ion-card-content>
       <ion-list>
-        <ion-item [routerLink]="['/lista-alumnos/Clase L-X']" routerLinkActive="router-link-active" [button]="true">
+        <ion-item *ngFor="let clase of clases" (click)="listAlumno(clase.codigo)" [button]="true">
           <ion-icon color="tertiary" slot="start" name="list-circle" size="large"></ion-icon>
-          <ion-label>Clase L-X</ion-label>
+          <ion-label>{{clase.nombre}}</ion-label>
           <ion-note slot="end"><ion-icon size="large" name="arrow-forward-outline"></ion-icon></ion-note>
         </ion-item>
 
-        <ion-item [routerLink]="['/lista-alumnos/Clase V']" routerLinkActive="router-link-active" [button]="true">
-          <ion-icon color="danger" slot="start" name="list-circle" size="large"></ion-icon>
-          <ion-label>Clase V</ion-label>
-          <ion-note slot="end"><ion-icon size="large" name="arrow-forward-outline"></ion-icon>
-          </ion-note>
-        </ion-item>
       </ion-list>
     </ion-card-content>
   </ion-card>
@@ -65,7 +59,7 @@
     </ion-card-content>
   </ion-card>
 
-  <app-listado></app-listado>
+  
 
   <strong class="capitalize">{{ folder }}</strong>
   <p>
