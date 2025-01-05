@@ -27,7 +27,7 @@
           </div>
           <app-grafica-circular [asistencia]="80"></app-grafica-circular>
         </div>
-        <ion-item [button]="true" (click)="listTotalPagos()">
+        <ion-item [button]="true" (click)="listTotalPagos(getDisciplina().id)">
           <ion-icon name="calendar-outline" slot="start"></ion-icon>
           <ion-label>
             <h2>Lista de pagos</h2>

@@ -4,4 +4,5 @@ export interface Pago {
     cantidad: number;
     medio_pago: string;
     id_alumno: number;
+    id_disciplina:number;
     }

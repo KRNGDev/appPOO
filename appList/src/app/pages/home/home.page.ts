@@ -7,7 +7,7 @@ import { ModalController, IonAvatar,IonItem,IonCard ,IonCardContent,IonCardHeade
 import { addIcons } from 'ionicons';
 import { library,  playCircle, radio, search, pin,listCircle, arrowForwardOutline, share, trash, calendarOutline } from 'ionicons/icons';
 import { GraficaCircularComponent } from 'src/app/componente/grafica-circular/grafica-circular.component';
-import { ModalListPagoComponent } from 'src/app/componente/modal-list-pago/modal-list-pago.component';
+import { ModalTotalPagosComponent } from 'src/app/componente/modal-total-pagos/modal-total-pagos.component';
 import { ModalListAlumnosComponent } from 'src/app/componente/modal-list-alumnos/modal-list-alumnos.component';
 import { GraficaBarrasComponent } from 'src/app/componente/grafica-barras/grafica-barras.component';
 import { GraficaLinealComponent } from 'src/app/componente/grafica-lineal/grafica-lineal.component';
@@ -58,9 +58,12 @@ export class HomePage implements OnInit {
       modal.present();
   
     }
-    async listTotalPagos() {
+    async listTotalPagos(id_disciplina:number) {
       const modal = await this.modalCtrl.create({
-        component: ModalListPagoComponent,
+        component: ModalTotalPagosComponent,
+        componentProps: {
+          id_disciplina: id_disciplina
+        },
        
       });
   
