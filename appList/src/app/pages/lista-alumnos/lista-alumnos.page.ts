@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonItem, IonAvatar, IonNote, IonSelect, IonList, IonLabel, IonSelectOption, IonContent, IonMenuButton, IonIcon, IonButtons, IonHeader, IonTitle, IonToolbar, IonCard } from '@ionic/angular/standalone';
+import { IonItem, IonAvatar, IonNote, IonSelect, IonList, IonLabel, IonSelectOption, IonContent, IonMenuButton, IonIcon, IonButtons, IonHeader, IonTitle, IonToolbar, IonCard, IonCardSubtitle } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { library, logoUsd, cashOutline, playCircle, radio, search, searchOutline, closeOutline, checkmarkOutline, arrowBackOutline } from 'ionicons/icons';
 import { Alumno } from 'src/app/interface/alumno';
 import { AlumnoService } from 'src/app/service/alumnoService/alumno.service';
 import { Clase } from 'src/app/interface/clase';
+import { Profesor } from 'src/app/interface/profesor';
 
 
 @Component({
@@ -15,13 +16,14 @@ import { Clase } from 'src/app/interface/clase';
   templateUrl: './lista-alumnos.page.html',
   styleUrls: ['./lista-alumnos.page.scss'],
   standalone: true,
-  imports: [IonCard, IonAvatar, IonNote, IonList, IonSelect, IonSelectOption, IonLabel, IonItem, RouterLink, RouterLinkActive, IonContent, IonMenuButton, IonIcon, IonButtons, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonCardSubtitle, IonCard, IonAvatar, IonNote, IonList, IonSelect, IonSelectOption, IonLabel, IonItem, RouterLink, RouterLinkActive, IonContent, IonMenuButton, IonIcon, IonButtons, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 
 })
 export class ListaAlumnosPage implements OnInit {
-  codigo_clase: string = '';
+  id_disciplina: number|undefined;
   selectedOrder: string = 'ascendente';
   private clase: Clase = {} as Clase;
+  private profesor: Profesor={} as Profesor;
   alumnos: Alumno[] = [];
 
 
@@ -58,12 +60,14 @@ export class ListaAlumnosPage implements OnInit {
   }
 
   ngOnInit(): void {
-    this.codigo_clase = this.activatedRoute.snapshot.paramMap.get('id') as string;
-    this.alumnos = this.alumnoService.getAlumnos().filter(alumno => alumno.codigo_clase === this.codigo_clase);
-    this.clase = this.alumnoService.getClases().filter(clase => clase.codigo === this.codigo_clase)[0];
+    this.profesor = this.alumnoService.getProfesores().filter(profesor => profesor.id === this.alumnoService.id_usuario)[0];
+     
+    const clases = this.alumnoService.getClases().filter(clase => clase.id_disciplina === this.profesor.id_disciplina);
+    const alumnosDeClases = clases.flatMap(clase => this.alumnoService.getAlumnos().filter(alumno => alumno.codigo_clase === clase.codigo));
+    this.alumnos = alumnosDeClases;    
     this.sortList();
-    console.log(this.codigo_clase);
   }
+    
 
   getClase() {
     return this.clase;

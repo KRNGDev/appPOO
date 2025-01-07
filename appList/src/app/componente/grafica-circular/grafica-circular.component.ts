@@ -35,11 +35,12 @@ export class GraficaCircularComponent implements OnChanges {
     this.circleOptions={
       series: [asistenciaValida],
       chart: {
-        height: 110,
+        
         type: "radialBar",
         offsetY: 0,
         offsetX: 0,
-        width: 110,
+        height: 120,
+        width: 120,
         
       },
       colors: this.color,

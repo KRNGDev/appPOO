@@ -15,10 +15,11 @@ import { Profesor } from './interface/profesor';
 })
 export class AppComponent {
   private profesor :Profesor={} as Profesor;
-  public appPages = [
+  
+  public appPages = [   
     { title: 'Home', url: '/home/Home', icon: 'home' },
     { title: 'Estadisticas', url: '/estadistcas', icon: 'bar-chart' },
-    { title: 'Alumnos', url: '/lista-alumnos/'+this.profesor.id_disciplina, icon: 'people' },
+    { title: 'Alumnos', url: '/lista-alumnos', icon: 'people' },
     { title: 'Registro', url: '/registro', icon: 'archive' },
     { title: 'Cursos', url: '/lista-alumnos/Cursos', icon: 'school' },
     
@@ -27,9 +28,11 @@ export class AppComponent {
 
   constructor(private datosService: AlumnoService) {
     addIcons({ mailOutline,schoolSharp ,barChartSharp, peopleSharp, homeOutline, homeSharp , mailSharp, paperPlaneOutline, paperPlaneSharp, heartOutline, heartSharp, archiveOutline, archiveSharp, trashOutline, trashSharp, warningOutline, warningSharp, bookmarkOutline, bookmarkSharp });
+   
   }
   ngOnInit(){
-    this.profesor = this.datosService.getProfesores().filter(profesor => profesor.id === this.datosService.id_usuario)[0];
+        this.profesor = this.datosService.getProfesores().filter(profesor => profesor.id === this.datosService.id_usuario)[0];
+
   }
   getProfesor(){
     return this.profesor;
