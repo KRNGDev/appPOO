@@ -4,10 +4,10 @@
       <ion-content>
         <ion-list id="inbox-list">
           <ion-avatar class="profile-image">
-            <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="avatar">
+            <img [src]="getProfesor().imagen" alt="avatar">
           </ion-avatar>
-          <ion-list-header>Nombre</ion-list-header>
-          <ion-note>hi&#64;ionicframework.com</ion-note>
+          <ion-list-header>{{getProfesor().name}} {{getProfesor().apellido}}</ion-list-header>
+          <ion-note>{{getProfesor().email}}</ion-note>
 
           @for (p of appPages; track p; let i = $index) {
             <ion-menu-toggle auto-hide="false">

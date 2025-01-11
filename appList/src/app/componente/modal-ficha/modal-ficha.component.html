@@ -1,7 +1,7 @@
 <div class="ion-page">
   <ion-header [translucent]="true">
     <ion-toolbar>
-      <ion-buttons (click)="pagAtras()" slot="start">
+      <ion-buttons (click)="cancel()" slot="start">
         <ion-icon name="arrow-back-outline" size="large"></ion-icon>
       </ion-buttons>
       <ion-title>Ficha Alumno</ion-title>
@@ -31,12 +31,13 @@
             <ion-card-title
               >{{getAlumno()?.name}} {{getAlumno()?.apellido}}
             </ion-card-title>
-            <ion-card-subtitle>Shodan</ion-card-subtitle>
+            <ion-card-subtitle>{{getGrado().nombre}}</ion-card-subtitle>
           </div>
-          <app-grafica-circular
-            *ngIf="getAlumno()"
-            [asistencia]="getAlumno()?.asistencia??0"
-          ></app-grafica-circular>
+            <app-grafica-circular
+            *ngIf="getAlumno() && (getAlumno()?.asistencia ?? 0) >= 0"
+            [asistencia]="getAlumno()?.asistencia ?? 0"
+            (asistenciaChange)="updateAsistencia($event)"
+            ></app-grafica-circular>
         </div>
 
         <ion-item lines="none" expand="block">

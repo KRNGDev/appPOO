@@ -1,10 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-buttons (click)="pagAtras()" slot="start">
+    <ion-buttons (click)="cancel()" slot="start">
       <ion-icon name="arrow-back-outline" size="large"></ion-icon>
     </ion-buttons>
-    <ion-title>Total Alumnos</ion-title>
-    
+    <ion-title>{{getClase().nombre}}</ion-title>
   </ion-toolbar>
   <ion-item>
     <ion-label>Ordenar por:</ion-label>
@@ -23,7 +22,7 @@
  
   <ion-list>
     <ion-card-subtitle slot="end">Total de alumnos: {{alumnos.length}}</ion-card-subtitle>
-      <ion-item *ngFor="let alumno of alumnos" [routerLink]="['/ficha-alumno',alumno.id]" routerLinkActive="router-link-active" [button]="true">
+      <ion-item *ngFor="let alumno of alumnos" (click)="fichaAlumno(alumno.id)" routerLinkActive="router-link-active" [button]="true">
         <ion-avatar slot="start">
           <img alt="Silhouette of mountains" [src]="alumno.imagen" />
           <ion-icon  [name]="alumno.mca_pago ? 'checkmark-outline' : 'close-outline'" [color]="alumno.mca_pago ? 'success' : 'danger'" style="position: absolute; bottom: 0; left: 20;">

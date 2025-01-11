@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ModalController, ActionSheetController, IonInput, IonList, IonCardSubtitle, IonItem, IonCardTitle, IonCardHeader, IonCardContent, IonCard, IonLabel, IonAvatar, IonChip, IonButtons, IonIcon, IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonModal } from '@ionic/angular/standalone';
@@ -10,27 +10,52 @@ import { Alumno } from 'src/app/interface/alumno';
 import { AlumnoService } from 'src/app/service/alumnoService/alumno.service';
 import { ModalFormPagoComponent } from 'src/app/componente/modal-form-pago/modal-form-pago.component';
 import { ModalListPagoComponent } from 'src/app/componente/modal-list-pago/modal-list-pago.component';
+import { Grados } from 'src/app/interface/grados';
 
 @Component({
-  selector: 'app-ficha-alumno',
-  templateUrl: './ficha-alumno.page.html',
-  styleUrls: ['./ficha-alumno.page.scss'],
+  selector: 'app-modal-ficha',
+  templateUrl: './modal-ficha.component.html',
+  styleUrls: ['./modal-ficha.component.scss'],
   standalone: true,
-  imports: [IonModal, IonButton, ModalListPagoComponent, ModalFormPagoComponent, IonContent, IonInput, IonList, GraficaCircularComponent, IonCardSubtitle, IonItem, IonCardTitle, IonCardHeader, IonCardContent, IonCard, IonLabel, IonAvatar, IonChip, IonIcon, IonButtons, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonModal, IonButton, IonContent, IonInput, IonList, GraficaCircularComponent, IonCardSubtitle, IonItem, IonCardTitle, IonCardHeader, IonCardContent, IonCard, IonLabel, IonAvatar, IonChip, IonIcon, IonButtons, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
-
-
-export class FichaAlumnoPage implements OnInit {
-  public id!: string;
-  private activatedRoute = inject(ActivatedRoute);
+export class ModalFichaComponent  implements OnInit {
+  @Input() id_alumno!: number;
   private alumno: Alumno | undefined;
   presentingElement!: HTMLElement | null;
+  private grado: Grados={} as Grados;
 
-
-  constructor(private modalCtrl: ModalController, private actionSheetCtrl: ActionSheetController, private location: Location, private alumnoService: AlumnoService) {
-    addIcons({ arrowBackOutline, trophyOutline, listOutline, cashSharp, closeCircle, calendarOutline, timeOutline, schoolOutline, callOutline, mailOutline, locationOutline, cashOutline, personOutline });
-    this.asignar();
+  constructor(
+    private modalCtrl: ModalController,
+    private actionSheetCtrl: ActionSheetController,
+    private location: Location,
+    private alumnoService: AlumnoService
+  ) {
+    addIcons({
+      arrowBackOutline,
+      trophyOutline,
+      listOutline,
+      cashSharp,
+      closeCircle,
+      calendarOutline,
+      timeOutline,
+      schoolOutline,
+      callOutline,
+      mailOutline,
+      locationOutline,
+      cashOutline,
+      personOutline,
+    });
+   
+    
   }
+
+  private initialize() {
+    this.asignar();
+    this.pagosDelMes();
+    this.grado=this.alumnoService.getGrados().filter(grado=> grado.id_alumno== this.alumno?.id)[0];
+  }
+
   async formPago() {
     const modal = await this.modalCtrl.create({
       component: ModalFormPagoComponent,
@@ -39,12 +64,13 @@ export class FichaAlumnoPage implements OnInit {
       },
     });
 
-    modal.present();
-    const { data, role } = await modal.onWillDismiss();
+    await modal.present();
+    const { role } = await modal.onWillDismiss();
     if (role === 'confirm') {
       this.pagosDelMes();
     }
   }
+
   async listPago() {
     const modal = await this.modalCtrl.create({
       component: ModalListPagoComponent,
@@ -53,8 +79,7 @@ export class FichaAlumnoPage implements OnInit {
       },
     });
 
-    modal.present();
-
+    await modal.present();
   }
 
   async actionSheetPagos() {
@@ -64,23 +89,19 @@ export class FichaAlumnoPage implements OnInit {
         {
           text: 'Formulario de Pago',
           icon: 'cash-outline',
-          handler: () => {
-            this.formPago();
-          }
+          handler: () => this.formPago(),
         },
         {
           text: 'Lista de Pagos',
           icon: 'list-outline',
-          handler: () => {
-            this.listPago();
-          }
+          handler: () => this.listPago(),
         },
         {
           text: 'Cancelar',
           icon: 'close',
-          role: 'cancel'
-        }
-      ]
+          role: 'cancel',
+        },
+      ],
     });
     await actionSheet.present();
   }
@@ -94,61 +115,79 @@ export class FichaAlumnoPage implements OnInit {
           icon: 'call-outline',
           handler: () => {
             window.location.href = `tel:${this.getAlumno()?.telefono}`;
-          }
+          },
         },
         {
           text: `Email: ${this.getAlumno()?.email}`,
           icon: 'mail-outline',
           handler: () => {
             window.location.href = `mailto:${this.getAlumno()?.email}`;
-          }
-        }
-      ]
+          },
+        },
+      ],
     });
     await actionSheet.present();
   }
 
-  asignar() {
-    this.alumno = this.alumnoService.getAlumnos().find((alumno) => alumno.id === parseInt(this.id));
+  private asignar() {
+    this.alumno = this.alumnoService
+      .getAlumnos()
+      .find((alumno) => alumno.id === this.id_alumno);
     console.log(this.alumno);
   }
+
   pagAtras() {
     this.location.back();
   }
-  pagosDelMes() {
+
+  private pagosDelMes() {
     const mesActual = new Date().getMonth();
     const anoActual = new Date().getFullYear();
-    const pagosDelMes = this.alumnoService.getPagos().filter(pago => {
-      const pagoDate = new Date(pago.fecha);
-      return pago.id_alumno === parseInt(this.id) && pagoDate.getMonth() === mesActual && pagoDate.getFullYear() === anoActual;
-    });
+    const pagosDelMes = this.alumnoService
+      .getPagos()
+      .filter((pago) => {
+        const pagoDate = new Date(pago.fecha);
+        return (
+          pago.id_alumno === this.id_alumno &&
+          pagoDate.getMonth() === mesActual &&
+          pagoDate.getFullYear() === anoActual
+        );
+      });
 
-    if (pagosDelMes.length === 0 && this.alumno) {
-      this.alumno.mca_pago = false;
-    } else if (pagosDelMes.length > 0 && this.alumno) {
-      this.alumno.mca_pago = true;
+    if (this.alumno) {
+      this.alumno.mca_pago = pagosDelMes.length > 0;
     }
   }
 
   ultimoPago(id: number): string {
     const pagos = this.alumnoService.getPagos();
-    const pago = pagos.sort((a, b) => new Date(a.fecha).getTime() - new Date(b.fecha).getTime()).filter(pago => pago.id_alumno === id);
-    const ultimoPago = pago[pago.length - 1];
-    if (!ultimoPago) {
-      return 'No hay pagos';
-    } else {
-      return ultimoPago.fecha;
-    }
+    const pago = pagos
+      .filter((pago) => pago.id_alumno === id)
+      .sort((a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime());
+    const ultimoPago = pago[0];
+    return ultimoPago ? ultimoPago.fecha : 'No hay pagos';
+  }
 
+  cancel() {
+    return this.modalCtrl.dismiss(null, 'cancel');
   }
 
   getAlumno() {
     return this.alumno;
   }
+  getGrado(){
+    return this.grado;
+  }
+ 
+  updateAsistencia(event: any) {
+    if (this.alumno) {
+      this.alumno.asistencia = event;
+    }
+  }
+
   ngOnInit() {
-    this.id = this.activatedRoute.snapshot.paramMap.get('id') as string;
-    this.asignar();
-    this.pagosDelMes();
+    console.log(this.id_alumno);
+    this.initialize();
   }
 
 

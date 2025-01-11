@@ -31,14 +31,16 @@ export class GraficaCircularComponent implements OnChanges {
 
   public circleOptions: circuleOptions;
   constructor() {    
+    const asistenciaValida = Math.max(0, this.asistencia || 0);
     this.circleOptions={
-      series: [this.asistencia],
+      series: [asistenciaValida],
       chart: {
-        height: 110,
+        
         type: "radialBar",
         offsetY: 0,
         offsetX: 0,
-        width: 110,
+        height: 120,
+        width: 120,
         
       },
       colors: this.color,
