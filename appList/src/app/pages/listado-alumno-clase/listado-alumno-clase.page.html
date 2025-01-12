@@ -1,0 +1,43 @@
+
+<ion-content [fullscreen]="true">
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-buttons (click)="pagAtras()" slot="start">
+        <ion-icon name="arrow-back-outline" size="large"></ion-icon>
+      </ion-buttons>
+      <ion-title>{{getClase().nombre}}</ion-title>
+    </ion-toolbar>
+    <ion-item>
+      <ion-label>Ordenar por:</ion-label>
+      <ion-select [value]="selectedOrder" (ionChange)="onOrderChange($event)">
+        <ion-select-option value="ascendente">Asistencia (Ascendente)</ion-select-option>
+        <ion-select-option value="descendente">Asistencia (Descendente)</ion-select-option>
+        <ion-select-option value="pagado">Pagos Completados</ion-select-option>
+        <ion-select-option value="noPagado">Pagos Pendientes</ion-select-option>
+      </ion-select>
+  </ion-item>
+    </ion-header>
+  
+  <ion-content [fullscreen]="true">
+    
+  
+   
+    <ion-list>
+      <ion-card-subtitle slot="end">Total de alumnos: {{alumnos.length}}</ion-card-subtitle>
+        <ion-item *ngFor="let alumno of alumnos" (click)="fichaAlumno(alumno.id)" routerLinkActive="router-link-active" [button]="true">
+          <ion-avatar slot="start">
+            <img alt="Silhouette of mountains" [src]="alumno.imagen" />
+            <ion-icon  [name]="alumno.mca_pago ? 'checkmark-outline' : 'close-outline'" [color]="alumno.mca_pago ? 'success' : 'danger'" style="position: absolute; bottom: 0; left: 20;">
+            </ion-icon>
+          </ion-avatar>
+          <ion-label>
+            <h2>{{alumno.name}} {{alumno.apellido}}</h2>
+          </ion-label>
+          <ion-note slot="end">Asistencia {{alumno.asistencia}}</ion-note>
+        
+        </ion-item>
+      
+    </ion-list>
+  </ion-content>
+  
+</ion-content>

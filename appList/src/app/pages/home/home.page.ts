@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ModalController, IonAvatar,IonItem,IonCard ,IonCardContent,IonCardHeader,IonCardSubtitle,IonCardTitle,IonIcon,IonNote, IonList,IonLabel, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { library,  playCircle, radio, search, pin,listCircle, arrowForwardOutline, share, trash, calendarOutline } from 'ionicons/icons';
+import { library, barChartSharp,  playCircle, radio, search, pin,listCircle, arrowForwardOutline, share, trash, calendarOutline } from 'ionicons/icons';
 import { GraficaCircularComponent } from 'src/app/componente/grafica-circular/grafica-circular.component';
 import { ModalTotalPagosComponent } from 'src/app/componente/modal-total-pagos/modal-total-pagos.component';
 import { ModalListAlumnosComponent } from 'src/app/componente/modal-list-alumnos/modal-list-alumnos.component';
@@ -20,7 +20,7 @@ import { Clase } from 'src/app/interface/clase';
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
   standalone: true,
-  imports: [ListadoComponent, GraficaLinealComponent, GraficaBarrasComponent, IonAvatar, RouterLink, RouterLinkActive, IonContent,GraficaCircularComponent, IonItem,IonCard ,IonCardContent,IonCardHeader,IonCardSubtitle,IonCardTitle,IonIcon,IonNote, IonList,IonLabel, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [   IonAvatar, RouterLink, RouterLinkActive, IonContent,GraficaCircularComponent, IonItem,IonCard ,IonCardContent,IonCardHeader,IonCardSubtitle,IonCardTitle,IonIcon,IonNote, IonList,IonLabel, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class HomePage implements OnInit {
  
@@ -33,7 +33,7 @@ export class HomePage implements OnInit {
 
 
   constructor(private datosService: AlumnoService, private modalCtrl: ModalController) {
-    addIcons({calendarOutline,listCircle,arrowForwardOutline,library,playCircle,radio,search,pin,share,trash});
+    addIcons({calendarOutline, barChartSharp, listCircle,arrowForwardOutline,library,playCircle,radio,search,pin,share,trash});
    
   }
 
