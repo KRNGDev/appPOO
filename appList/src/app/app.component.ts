@@ -1,33 +1,34 @@
 
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { IonAvatar, IonApp, IonSplitPane, IonMenu, IonContent, IonList, IonListHeader, IonNote, IonMenuToggle, IonItem, IonIcon, IonLabel, IonRouterOutlet, IonRouterLink } from '@ionic/angular/standalone';
+import { IonFooter,IonAvatar, IonApp, IonSplitPane, IonTitle, IonMenu, IonContent, IonList, IonListHeader, IonNote, IonMenuToggle, IonItem, IonIcon, IonLabel, IonRouterOutlet, IonRouterLink } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { mailOutline,schoolSharp, barChartSharp,peopleSharp,homeOutline, homeSharp, mailSharp, paperPlaneOutline, paperPlaneSharp, heartOutline, heartSharp, archiveOutline, archiveSharp, trashOutline, trashSharp, warningOutline, warningSharp, bookmarkOutline, bookmarkSharp } from 'ionicons/icons';
+import { exitOutline, mailOutline,schoolSharp, barChartSharp,peopleSharp,homeOutline, homeSharp, mailSharp, paperPlaneOutline, paperPlaneSharp, heartOutline, heartSharp, archiveOutline, archiveSharp, trashOutline, trashSharp, warningOutline, warningSharp, bookmarkOutline, bookmarkSharp } from 'ionicons/icons';
 import { AlumnoService } from './service/alumnoService/alumno.service';
 import { Profesor } from './interface/profesor';
+import { App } from '@capacitor/app';
+
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
-  imports: [RouterLink, IonAvatar, RouterLinkActive, IonApp, IonSplitPane, IonMenu, IonContent, IonList, IonListHeader, IonNote, IonMenuToggle, IonItem, IonIcon, IonLabel, IonRouterLink, IonRouterOutlet],
+  imports: [RouterLink, IonFooter, IonAvatar, IonTitle, RouterLinkActive, IonApp, IonSplitPane, IonMenu, IonContent, IonList, IonListHeader, IonNote, IonMenuToggle, IonItem, IonIcon, IonLabel, IonRouterLink, IonRouterOutlet],
 })
 export class AppComponent {
   private profesor :Profesor={} as Profesor;
   
   public appPages = [   
     { title: 'Home', url: '/home/Home', icon: 'home' },
-    { title: 'Estadisticas', url: '/estadistcas', icon: 'bar-chart' },
+    { title: 'Cursos', url: '/listado-cursos', icon: 'school' },
     { title: 'Alumnos', url: '/lista-alumnos', icon: 'people' },
     { title: 'Registro', url: '/registro', icon: 'archive' },
-    { title: 'Cursos', url: '/lista-alumnos/Cursos', icon: 'school' },
-    
+    { title: 'Estadisticas', url: '/estadistcas', icon: 'bar-chart' },    
   ];
   
 
   constructor(private datosService: AlumnoService) {
-    addIcons({ mailOutline,schoolSharp ,barChartSharp, peopleSharp, homeOutline, homeSharp , mailSharp, paperPlaneOutline, paperPlaneSharp, heartOutline, heartSharp, archiveOutline, archiveSharp, trashOutline, trashSharp, warningOutline, warningSharp, bookmarkOutline, bookmarkSharp });
+    addIcons({ mailOutline,exitOutline, schoolSharp ,barChartSharp, peopleSharp, homeOutline, homeSharp , mailSharp, paperPlaneOutline, paperPlaneSharp, heartOutline, heartSharp, archiveOutline, archiveSharp, trashOutline, trashSharp, warningOutline, warningSharp, bookmarkOutline, bookmarkSharp });
    
   }
   ngOnInit(){
@@ -36,6 +37,10 @@ export class AppComponent {
   }
   getProfesor(){
     return this.profesor;
+  }
+  
+  salirApp(){
+    App.exitApp();
   }
 
 

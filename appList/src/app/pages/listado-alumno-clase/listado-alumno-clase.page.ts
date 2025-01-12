@@ -1,32 +1,28 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute,  } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonItem, ModalController,  IonAvatar, IonNote, IonSelect, IonList, IonLabel, IonSelectOption, IonContent,  IonIcon, IonButtons, IonHeader, IonTitle, IonToolbar,  IonCardSubtitle, } from '@ionic/angular/standalone';
+import { ModalController, IonItem, IonAvatar, IonNote, IonSelect, IonList, IonLabel, IonSelectOption, IonContent, IonMenuButton, IonIcon, IonButtons, IonHeader, IonTitle, IonToolbar, IonCard, IonCardSubtitle } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { library, logoUsd, cashOutline, playCircle, radio, search, searchOutline, closeOutline, checkmarkOutline, arrowBackOutline } from 'ionicons/icons';
 import { Alumno } from 'src/app/interface/alumno';
 import { ModalFichaComponent } from 'src/app/componente/modal-ficha/modal-ficha.component';
 import { AlumnoService } from 'src/app/service/alumnoService/alumno.service';
 import { Clase } from 'src/app/interface/clase';
-import { Profesor } from 'src/app/interface/profesor';;
 
 
 @Component({
-  selector: 'app-lista-alumnos',
-  templateUrl: './lista-alumnos.page.html',
-  styleUrls: ['./lista-alumnos.page.scss'],
+  selector: 'app-listado-alumno-clase',
+  templateUrl: './listado-alumno-clase.page.html',
+  styleUrls: ['./listado-alumno-clase.page.scss'],
   standalone: true,
-  imports: [     IonCardSubtitle,  IonAvatar, IonNote, IonList, IonSelect, IonSelectOption, IonLabel, IonItem,   IonContent, IonIcon, IonButtons, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ]
+  imports: [IonCardSubtitle,  IonAvatar, IonNote, IonList, IonSelect, IonSelectOption, IonLabel, IonItem, RouterLink, RouterLinkActive, IonContent, IonMenuButton, IonIcon, IonButtons, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 
 })
-export class ListaAlumnosPage implements OnInit {
-  id_disciplina: number|undefined;
-  id_alumno:Alumno={}as Alumno;
-  isModalOpen = this.alumnoService.isModalOpen;
-  selectedOrder: string = 'descendente';
+export class ListadoAlumnoClasePage implements OnInit {
+  codigo_clase!:string;
+  selectedOrder: string = 'ascendente';
   private clase: Clase = {} as Clase;
-  private profesor: Profesor={} as Profesor;
   alumnos: Alumno[] = [];
 
 
@@ -65,23 +61,6 @@ export class ListaAlumnosPage implements OnInit {
   pagAtras() {
     this.location.back();
   }
-
-  private obtencionDatos(){
-    this.profesor = this.alumnoService.getProfesores().filter(profesor => profesor.id === this.alumnoService.id_usuario)[0];     
-    const clases = this.alumnoService.getClases().filter(clase => clase.id_disciplina === this.profesor.id_disciplina);
-    const todosLosAlumnos = clases.flatMap(clase => this.alumnoService.getAlumnos().filter(alumno => alumno.codigo_clase === clase.codigo));
-    this.alumnos = todosLosAlumnos;
-  }
-
-  ngOnInit(): void {
-    this.obtencionDatos();   
-    this.sortList();
-  }
-    
-
-  getClase() {
-    return this.clase;
-  }
   async fichaAlumno(id_alumno: number) {
     const modal = await this.modalCtrl.create({
       component: ModalFichaComponent,
@@ -93,4 +72,17 @@ export class ListaAlumnosPage implements OnInit {
     modal.present();
 
   }
+
+  ngOnInit(): void {   
+    this.codigo_clase=this.activatedRoute.snapshot.paramMap.get('id') as string;
+    this.alumnos = this.alumnoService.getAlumnos().filter(alumno => alumno.codigo_clase === this.codigo_clase);
+    this.clase = this.alumnoService.getClases().filter(clase => clase.codigo === this.codigo_clase)[0];
+    this.sortList();
+    console.log(this.codigo_clase);
+  }
+
+  getClase() {
+    return this.clase;
+  }
+
 }

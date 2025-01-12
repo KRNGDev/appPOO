@@ -1,0 +1,36 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons (click)="pagAtras()" slot="start">
+      <ion-icon name="arrow-back-outline" size="large"></ion-icon>
+    </ion-buttons>
+    <ion-title>Listado de Cursos</ion-title>
+    
+  </ion-toolbar>
+  <ion-item>
+    <ion-label>Ordenar por:</ion-label>
+    <ion-select [value]="selectedOrder" (ionChange)="onOrderChange($event)">
+      <ion-select-option value="ascendente">Año (Ascendente)</ion-select-option>
+      <ion-select-option value="descendente">Año (Descendente)</ion-select-option>
+      </ion-select>
+</ion-item>
+  </ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-card-subtitle slot="end">Total de Cursos: {{cursos.length}}</ion-card-subtitle>
+      <ion-item *ngFor="let curso of cursos" (click)="fichaCurso()" [button]="true">
+        <ion-avatar slot="start">
+          <img alt="Silhouette of mountains" [src]="curso" />
+          <ion-icon  [name]="curso ? 'checkmark-outline' : 'close-outline'" [color]="curso ? 'success' : 'danger'" style="position: absolute; bottom: 0; left: 20;">
+          </ion-icon>
+        </ion-avatar>
+        <ion-label>
+          <h2>{{curso.name}} {{curso}}</h2>
+        </ion-label>
+        <ion-note slot="end">Asistencia {{curso}}</ion-note>
+      
+      </ion-item>
+    
+  </ion-list>
+ 
+</ion-content>
