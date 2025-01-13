@@ -28,11 +28,6 @@
       <ion-input type="number" [(ngModel)]="curso.anioFin" name="anioFinCurso"></ion-input>
     </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">ID Disciplina</ion-label>
-      <ion-input type="number" [(ngModel)]="curso.id_disciplina" name="idDisciplinaCurso"></ion-input>
-    </ion-item>
-
     <ion-list>
       <ion-item>
         <ion-icon slot="start" name="book-outline"></ion-icon> Clases
@@ -61,19 +56,15 @@
           <ion-input type="number" [(ngModel)]="clase.duracion" name="duracionClase{{ i }}"></ion-input>
         </ion-item>
 
-        <ion-item>
-          <ion-label position="floating">ID Disciplina</ion-label>
-          <ion-input type="number" [(ngModel)]="clase.id_disciplina" name="idDisciplinaClase{{ i }}"></ion-input>
-        </ion-item>
-
+        
         <ion-item>
           <ion-label position="floating">Código del Curso</ion-label>
-          <ion-input type="text" [(ngModel)]="clase.codigo_curso" name="codigoCursoClase{{ i }}"></ion-input>
+          <ion-input type="text" [(ngModel)]="clase.codigo" name="codigoCursoClase{{ i }}"></ion-input>
         </ion-item>
       </ion-card>
     </ion-list>
 
    
-    <ion-button expand="full" type="submit" (click)="submit(curso)">Guardar</ion-button>
+    <ion-button expand="full" type="submit" (click)="submit(curso,clases)">Guardar</ion-button>
   </form>
 </ion-content>

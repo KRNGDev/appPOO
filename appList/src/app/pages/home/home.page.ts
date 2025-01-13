@@ -39,7 +39,7 @@ export class HomePage implements OnInit {
   ngOnInit() {
     this.folder = this.activatedRoute.snapshot.paramMap.get('id') as string;
     this.disciplina = this.datosService.getDisciplinas().filter(disciplina => disciplina.id === this.datosService.id_usuario)[0];
-    this.curso = this.datosService.getCursos().filter(curso => curso.id_disciplina === this.disciplina.id)[0];
+    this.curso = this.datosService.getCursos().sort((a,b) => b.anioInicio - a.anioInicio).filter(curso => curso.id_disciplina === this.disciplina.id)[0];
     this.clases = this.datosService.getClases().filter(clase => clase.codigo_curso === this.curso.codigo);
   }
   getCurso(){

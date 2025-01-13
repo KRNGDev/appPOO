@@ -26,6 +26,7 @@ import { Alumno } from 'src/app/interface/alumno';
 import { Router } from '@angular/router';
 import { Curso } from 'src/app/interface/curso';
 import { Clase } from 'src/app/interface/clase';
+import { Profesor } from 'src/app/interface/profesor';
 
 
 @Component({
@@ -53,6 +54,7 @@ import { Clase } from 'src/app/interface/clase';
 export class FormCursoComponent implements OnInit {
   curso: Curso = {} as Curso;
   clases: Clase[]=[];
+  usuario:Profesor={}as Profesor;
 
   constructor(
     private modalCtrl: ModalController,
@@ -62,7 +64,10 @@ export class FormCursoComponent implements OnInit {
       addIcons({addSharp,bookOutline});
     }
 
-  ngOnInit() { }
+  ngOnInit() {
+
+  this.usuario=this.datosService.usuario;
+   }
 
   canDismiss = async () => {
 
@@ -94,7 +99,7 @@ export class FormCursoComponent implements OnInit {
       nombre: '',
       horario: '',
       duracion: 0,
-      id_disciplina: 0,
+      id_disciplina: this.usuario.id_disciplina,
       codigo_curso: ''
     } as Clase);
   }
@@ -102,9 +107,15 @@ export class FormCursoComponent implements OnInit {
     this.clases.splice(i, 1);
   }
 
-  submit(curso: Curso) {   
-   // this.datosService.setAlumnos(alumno);
-    this.router.navigate(['/lista-alumnos']);
+  submit(curso: Curso,clases: Clase[]) {   
+    curso.id_disciplina=this.usuario.id_disciplina;
+    curso.codigo="K"+this.datosService.getCursos().filter(curso=>curso.id_disciplina===this.usuario.id_disciplina).length;
+    clases.forEach(clase=>clase.codigo_curso=curso.codigo);
+    this.datosService.setCursos(curso);
+    this.datosService.setClases(clases)
+    this.router.navigate(['/listado-cursos/'+this.usuario.id_disciplina]);
+    console.log(curso);
+    console.log(clases);
     this.cancel();
   }
 

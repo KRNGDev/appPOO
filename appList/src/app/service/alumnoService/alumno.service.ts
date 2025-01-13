@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { find } from 'rxjs';
 import { Alumno } from 'src/app/interface/alumno';
 import { Clase } from 'src/app/interface/clase';
 import { Curso } from 'src/app/interface/curso';
@@ -26,7 +27,7 @@ export class AlumnoService {
     { id: 10, nombre: 'Jiu Jitsu', imagen: 'https://ionicframework.com/docs/img/demos/avatar.svg' }
   ]
   private cursos: Curso[] = [
-    { codigo: 'K1', name: 'Kenjutsu', precio: 50, anioInicio: 2014, anioFin: 2015, id_disciplina: 1 },
+    { codigo: 'K11', name: 'Kenjutsu', precio: 50, anioInicio: 2014, anioFin: 2015, id_disciplina: 1 },
     { codigo: 'K2', name: 'Kenjutsu', precio: 50, anioInicio: 2015, anioFin: 2016, id_disciplina: 1 },
     { codigo: 'K3', name: 'Kenjutsu', precio: 50, anioInicio: 2016, anioFin: 2017, id_disciplina: 1 },
     { codigo: 'K4', name: 'Kenjutsu', precio: 50, anioInicio: 2017, anioFin: 2018, id_disciplina: 1 },
@@ -36,8 +37,7 @@ export class AlumnoService {
     { codigo: 'K8', name: 'Kenjutsu', precio: 50, anioInicio: 2021, anioFin: 2022, id_disciplina: 1 },
     { codigo: 'K9', name: 'Kenjutsu', precio: 50, anioInicio: 2022, anioFin: 2023, id_disciplina: 1 },
     { codigo: 'K10', name: 'Kenjutsu', precio: 50, anioInicio: 2023, anioFin: 2024, id_disciplina: 1 },
-    { codigo: 'K11', name: 'Kenjutsu', precio: 50, anioInicio: 2024, anioFin: 2025, id_disciplina: 1 },
-    { codigo: 'K1', name: 'Kenjutsu', precio: 50, anioInicio: 2014, anioFin: 2015, id_disciplina: 1 },
+    { codigo: 'K1', name: 'Kenjutsu', precio: 50, anioInicio: 2024, anioFin: 2025, id_disciplina: 1 },
     { codigo: 'K1', name: 'Kenjutsu', precio: 50, anioInicio: 2024, anioFin: 2025, id_disciplina: 1 },
     { codigo: 'J1', name: 'Judo', precio: 50, anioInicio: 2024, anioFin: 2025, id_disciplina: 2 },
     { codigo: 'K2', name: 'Karate', precio: 50, anioInicio: 2024, anioFin: 2025, id_disciplina: 3 },
@@ -264,15 +264,11 @@ export class AlumnoService {
     {id_alumno:66,id_disciplina:1,nombre:'Shoden'},
     {id_alumno:28,id_disciplina:1,nombre:'Chuden'},
   ]
-
+  usuario: Profesor = this.profesores.find(usuario => usuario.id_disciplina === this.id_usuario) || {}as Profesor;
+  
 
   constructor() {
-    this.alumnos.forEach(alumno => {
-      const pago = this.pagos.find(pago => pago.id_alumno === alumno.id && pago.fecha === '2025-01-01');
-      if (pago) {
-        alumno.mca_pago = true;
-      }
-    });
+   
   }
 
   //Esta sin implementar hay que hacerlo
@@ -321,8 +317,11 @@ export class AlumnoService {
     return this.clases;
   }
 
-  setClases(clase: Clase): void {
-    this.clases.push(clase);
+  setClases(clases: Clase[]): void {
+    clases.forEach(clase=>
+      this.clases.push(clase)
+    );
+    
   }
 
   getAlumnos(): Alumno[] {
