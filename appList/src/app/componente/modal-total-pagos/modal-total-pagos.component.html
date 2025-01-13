@@ -9,8 +9,8 @@
   <ion-item>
     <ion-label>Ordenar por:</ion-label>
     <ion-select  (ionChange)="onOrderChange($event)" placeholder="Seleccionar">
-      <ion-select-option value="descendente">Mayor Menor</ion-select-option>
-      <ion-select-option value="ascendente">Menor a Mayor</ion-select-option>    
+      <ion-select-option value="descendente">Fecha(mayor a menor)</ion-select-option>
+      <ion-select-option value="ascendente">Fecha(menor a mayor)</ion-select-option>    
     </ion-select>
 </ion-item>
 </ion-header>
@@ -24,16 +24,17 @@
       <h2>No hay pagos</h2>         
     </ion-label>        
   </ion-item>
-  <ion-list>
-    <ion-item *ngFor="let pago of pagos">
-      <ion-avatar slot="start">
-        <ion-icon size="large" color="primary" name="document-sharp"></ion-icon>
-      </ion-avatar>
-      <ion-label>
-        <h2>{{pago.fecha}}</h2>
-        <p>{{pago.medio_pago}}</p>
-      </ion-label>
-      <ion-label slot="end">{{pago.cantidad}} €</ion-label>
-    </ion-item>
-  </ion-list>
+  
+<ion-list>
+  <ion-item *ngFor="let pago of pagos">
+    <ion-avatar slot="start">
+      <ion-icon size="large" color="primary" name="document-sharp"></ion-icon>
+    </ion-avatar>
+    <ion-label>
+      <h2>{{getNombreAlumno(pago.id_alumno)}}</h2>
+      <ion-card-subtitle>{{pago.fecha}} {{pago.medio_pago}}</ion-card-subtitle>
+    </ion-label>
+    <ion-label slot="end">{{pago.cantidad}} €</ion-label>
+  </ion-item>
+</ion-list>
 </ion-content>

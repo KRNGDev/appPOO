@@ -19,20 +19,24 @@ export class AppComponent {
   private profesor :Profesor={} as Profesor;
   
   public appPages = [   
-    { title: 'Home', url: '/home/Home', icon: 'home' },
-    { title: 'Cursos', url: '/listado-cursos', icon: 'school' },
-    { title: 'Alumnos', url: '/lista-alumnos', icon: 'people' },
-    { title: 'Registro', url: '/registro', icon: 'archive' },
-    { title: 'Estadisticas', url: '/estadistcas', icon: 'bar-chart' },    
-  ];
-  
+    { title: '', url: '', icon: '' },
+     
+    ];
+ 
 
   constructor(private datosService: AlumnoService) {
     addIcons({ mailOutline,exitOutline, schoolSharp ,barChartSharp, peopleSharp, homeOutline, homeSharp , mailSharp, paperPlaneOutline, paperPlaneSharp, heartOutline, heartSharp, archiveOutline, archiveSharp, trashOutline, trashSharp, warningOutline, warningSharp, bookmarkOutline, bookmarkSharp });
-   
+    this.profesor = this.datosService.getProfesores().filter(profesor => profesor.id === this.datosService.id_usuario)[0];
+    this.appPages = [
+      { title: 'Home', url: '/home/Home', icon: 'home' },
+      { title: 'Cursos', url: '/listado-cursos/' + (this.profesor ? this.profesor.id_disciplina : ''), icon: 'school' },
+      { title: 'Alumnos', url: '/lista-alumnos', icon: 'people' },
+      { title: 'Registro', url: '/registro', icon: 'archive' },
+      { title: 'Estadisticas', url: '/estadistcas', icon: 'bar-chart' },
+    ];
   }
   ngOnInit(){
-        this.profesor = this.datosService.getProfesores().filter(profesor => profesor.id === this.datosService.id_usuario)[0];
+       
 
   }
   getProfesor(){

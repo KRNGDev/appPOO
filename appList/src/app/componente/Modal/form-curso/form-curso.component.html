@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="canDismiss()">Cancel</ion-button>
+    </ion-buttons>
+    <ion-title>Registro Pago</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <form>
+    <ion-item>
+      <ion-label position="floating">Nombre del Curso</ion-label>
+      <ion-input type="text" [(ngModel)]="curso.name" name="nombreCurso"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Precio</ion-label>
+      <ion-input type="number" [(ngModel)]="curso.precio" name="precioCurso"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Año de Inicio</ion-label>
+      <ion-input type="number" [(ngModel)]="curso.anioInicio" name="anioInicioCurso"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Año de Fin</ion-label>
+      <ion-input type="number" [(ngModel)]="curso.anioFin" name="anioFinCurso"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">ID Disciplina</ion-label>
+      <ion-input type="number" [(ngModel)]="curso.id_disciplina" name="idDisciplinaCurso"></ion-input>
+    </ion-item>
+
+    <ion-list>
+      <ion-item>
+        <ion-icon slot="start" name="book-outline"></ion-icon> Clases
+        <ion-button slot="end" expand="full" (click)="addClase()">
+          <ion-icon color="light" name="add-sharp"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-card *ngFor="let clase of clases; let i = index">
+        <ion-item>
+          <ion-label> Clase {{ i + 1 }}</ion-label>
+          <ion-button color="danger" (click)="borrarClase(i)">Eliminar</ion-button>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Nombre de la Clase</ion-label>
+          <ion-input type="text" [(ngModel)]="clase.nombre" name="nombreClase{{ i }}"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Horario</ion-label>
+          <ion-input type="text" [(ngModel)]="clase.horario" name="horarioClase{{ i }}"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Duración</ion-label>
+          <ion-input type="number" [(ngModel)]="clase.duracion" name="duracionClase{{ i }}"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">ID Disciplina</ion-label>
+          <ion-input type="number" [(ngModel)]="clase.id_disciplina" name="idDisciplinaClase{{ i }}"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Código del Curso</ion-label>
+          <ion-input type="text" [(ngModel)]="clase.codigo_curso" name="codigoCursoClase{{ i }}"></ion-input>
+        </ion-item>
+      </ion-card>
+    </ion-list>
+
+   
+    <ion-button expand="full" type="submit" (click)="submit(curso)">Guardar</ion-button>
+  </form>
+</ion-content>

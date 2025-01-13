@@ -2,16 +2,12 @@
   <ion-header [translucent]="true">
     <ion-toolbar>
       <ion-buttons (click)="cancel()" slot="start">
-        <ion-icon name="arrow-back-outline" size="large"></ion-icon>
+        <ion-icon size="large" name="close-circle"></ion-icon>
       </ion-buttons>
       <ion-title>Ficha Alumno</ion-title>
-      <ion-buttons slot="end">
-        <ion-button color="danger" >Eliminar
-          <ion-icon slot="end" color="danger" name="close-circle"></ion-icon>
-        </ion-button>
-      </ion-buttons>
+
     </ion-toolbar>
-    
+
   </ion-header>
 
   <ion-content [fullscreen]="true">
@@ -28,16 +24,13 @@
       <ion-card-header class="profile-header">
         <div class="cabecera">
           <div class="texto">
-            <ion-card-title
-              >{{getAlumno()?.name}} {{getAlumno()?.apellido}}
+            <ion-card-title>{{getAlumno()?.name}} {{getAlumno()?.apellido}}
             </ion-card-title>
-            <ion-card-subtitle></ion-card-subtitle>
+            <ion-card-subtitle>{{getGrado()?.nombre}}</ion-card-subtitle>
           </div>
-            <app-grafica-circular
-            *ngIf="getAlumno() && (getAlumno()?.asistencia ?? 0) >= 0"
+          <app-grafica-circular *ngIf="getAlumno() && (getAlumno()?.asistencia ?? 0) >= 0"
             [asistencia]="getAlumno()?.asistencia ?? 0"
-            (asistenciaChange)="updateAsistencia($event)"
-            ></app-grafica-circular>
+            (asistenciaChange)="updateAsistencia($event)"></app-grafica-circular>
         </div>
 
         <ion-item lines="none" expand="block">
@@ -45,7 +38,7 @@
           <ion-label>
             <h4>Último pago</h4>
             <ion-label [color]="getAlumno()?.mca_pago? 'success' :'danger'">{{ultimoPago(getAlumno()?.id!)}}</ion-label>
-          </ion-label>         
+          </ion-label>
         </ion-item>
       </ion-card-header>
     </div>
@@ -60,7 +53,7 @@
           </ion-label>
         </ion-item>
         <ion-item lines="none">
-          <ion-icon name="time-outline" slot="start"></ion-icon>
+          <ion-icon name="happy-outline" [color]="true? 'success' :'danger'" slot="start"></ion-icon>
           <ion-label>
             <h4>Estado</h4>
             <p>Activo</p>
@@ -83,33 +76,36 @@
       </ion-list>
     </ion-item>
 
-    <ion-card id="pagos" [button]="getAlumno()?.mca_pago? 'false' :'true'" (click)="actionSheetPagos()" expand="block">
-      <ion-icon  name="cash-outline" color="success" size="large" slot="start">
-      </ion-icon>
-      <ion-item lines="none">       
-        <ion-icon  name="cash-outline" color="success" size="large" slot="start">
+    <ion-card id="pagos" [button]="'true'" (click)="actionSheetPagos()" expand="block">
+
+      <ion-item lines="none">
+        <ion-icon name="cash-outline" color="success" size="large" slot="start">
         </ion-icon>
         <ion-card-title>Gestión de Pagos</ion-card-title>
-      </ion-item>      
-    </ion-card>
-    
-    <ion-card [button]="getAlumno()?.mca_pago? 'false' :'true'" (click)="actionSheetContacto()" expand="block">
-      <ion-item lines="none">
-        <ion-icon name="call-outline" size="large" slot="start"></ion-icon>
-        <ion-card-title>Información de contacto</ion-card-title>
-      </ion-item>     
+      </ion-item>
     </ion-card>
 
-    
-    <ion-card  id="logros">
+    <ion-card id="logros">
       <ion-item lines="none">
-        <ion-icon name="trophy-outline" size="large" slot="start"></ion-icon>
+        <ion-icon name="trophy-outline" color="warning" size="large" slot="start"></ion-icon>
         <ion-card-title>Logros y Desempeños</ion-card-title>
       </ion-item>
-      <ion-card-content>
-        
-      </ion-card-content>
     </ion-card>
-     
+
+    <ion-card [button]="'true'" (click)="actionSheetContacto()" expand="block">
+      <ion-item lines="none">
+        <ion-icon name="call-outline" color="medium" size="large" slot="start"></ion-icon>
+        <ion-card-title>Información de contacto</ion-card-title>
+      </ion-item>
+    </ion-card>
+
+    <ion-card id="opciones" [button]="'true'" (click)="actionSheetOpciones()" expand="block">
+      <ion-item lines="none">
+        <ion-icon name="create-sharp"  size="large" slot="start"></ion-icon>
+        <ion-card-title>Opciones</ion-card-title>
+      </ion-item>
+
+    </ion-card>
+
   </ion-content>
 </div>

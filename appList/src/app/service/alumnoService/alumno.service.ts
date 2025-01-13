@@ -12,7 +12,7 @@ import { Profesor } from 'src/app/interface/profesor';
 })
 export class AlumnoService {
   id_usuario: number = 1;
-  isModalOpen=false;
+  
   private disciplinas: Disciplina[] = [
     { id: 1, nombre: 'Kenjutsu', imagen: 'https://ionicframework.com/docs/img/demos/avatar.svg' },
     { id: 2, nombre: 'Judo', imagen: 'https://ionicframework.com/docs/img/demos/avatar.svg' },
@@ -26,7 +26,19 @@ export class AlumnoService {
     { id: 10, nombre: 'Jiu Jitsu', imagen: 'https://ionicframework.com/docs/img/demos/avatar.svg' }
   ]
   private cursos: Curso[] = [
-    { codigo: 'K1', name: 'Curso 2024 2025', precio: 50, anioInicio: 2024, anioFin: 2025, id_disciplina: 1 },
+    { codigo: 'K1', name: 'Kenjutsu', precio: 50, anioInicio: 2014, anioFin: 2015, id_disciplina: 1 },
+    { codigo: 'K2', name: 'Kenjutsu', precio: 50, anioInicio: 2015, anioFin: 2016, id_disciplina: 1 },
+    { codigo: 'K3', name: 'Kenjutsu', precio: 50, anioInicio: 2016, anioFin: 2017, id_disciplina: 1 },
+    { codigo: 'K4', name: 'Kenjutsu', precio: 50, anioInicio: 2017, anioFin: 2018, id_disciplina: 1 },
+    { codigo: 'K5', name: 'Kenjutsu', precio: 50, anioInicio: 2018, anioFin: 2019, id_disciplina: 1 },
+    { codigo: 'K6', name: 'Kenjutsu', precio: 50, anioInicio: 2019, anioFin: 2020, id_disciplina: 1 },
+    { codigo: 'K7', name: 'Kenjutsu', precio: 50, anioInicio: 2020, anioFin: 2021, id_disciplina: 1 },
+    { codigo: 'K8', name: 'Kenjutsu', precio: 50, anioInicio: 2021, anioFin: 2022, id_disciplina: 1 },
+    { codigo: 'K9', name: 'Kenjutsu', precio: 50, anioInicio: 2022, anioFin: 2023, id_disciplina: 1 },
+    { codigo: 'K10', name: 'Kenjutsu', precio: 50, anioInicio: 2023, anioFin: 2024, id_disciplina: 1 },
+    { codigo: 'K11', name: 'Kenjutsu', precio: 50, anioInicio: 2024, anioFin: 2025, id_disciplina: 1 },
+    { codigo: 'K1', name: 'Kenjutsu', precio: 50, anioInicio: 2014, anioFin: 2015, id_disciplina: 1 },
+    { codigo: 'K1', name: 'Kenjutsu', precio: 50, anioInicio: 2024, anioFin: 2025, id_disciplina: 1 },
     { codigo: 'J1', name: 'Judo', precio: 50, anioInicio: 2024, anioFin: 2025, id_disciplina: 2 },
     { codigo: 'K2', name: 'Karate', precio: 50, anioInicio: 2024, anioFin: 2025, id_disciplina: 3 },
     { codigo: 'K3', name: 'Kung Fu', precio: 50, anioInicio: 2024, anioFin: 2025, id_disciplina: 4 },

@@ -18,7 +18,10 @@ import { arrowBackOutline } from 'ionicons/icons';
 export class RegistroAlumnoPage implements OnInit {
   private alumno: Alumno={} as Alumno;
 
-  constructor(private location: Location, private alumnoService: AlumnoService, private router: Router) { 
+  constructor(
+    private location: Location,
+    private alumnoService: AlumnoService,
+    private router: Router) { 
     addIcons({ arrowBackOutline });
   }
 

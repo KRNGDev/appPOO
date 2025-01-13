@@ -23,10 +23,8 @@ export const routes: Routes = [
     path: 'home/:id',
     loadComponent: () => import('./pages/home/home.page').then( m => m.HomePage)
   },
-  {
-    path: 'ficha-alumno/:id',
-    loadComponent: () => import('./pages/ficha-alumno/ficha-alumno.page').then( m => m.FichaAlumnoPage)
-  },
+  
+   
   {
     path: 'registro',
     loadComponent: () => import('./pages/registro/registro.page').then( m => m.RegistroPage)
@@ -40,7 +38,7 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/listado-alumno-clase/listado-alumno-clase.page').then( m => m.ListadoAlumnoClasePage)
   },
   {
-    path: 'listado-cursos',
+    path: 'listado-cursos/:id',
     loadComponent: () => import('./pages/listado-cursos/listado-cursos.page').then( m => m.ListadoCursosPage)
   },
 ];

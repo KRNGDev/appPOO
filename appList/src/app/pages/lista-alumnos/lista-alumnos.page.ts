@@ -2,7 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,  } from '@angular/router';
 import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonItem, ModalController,  IonAvatar, IonNote, IonSelect, IonList, IonLabel, IonSelectOption, IonContent,  IonIcon, IonButtons, IonHeader, IonTitle, IonToolbar,  IonCardSubtitle, } from '@ionic/angular/standalone';
+import { 
+  IonItem,
+  IonMenuButton,
+  ModalController,
+  IonAvatar,
+  IonNote,
+  IonSelect,
+  IonList,
+  IonLabel,
+  IonSelectOption,
+  IonContent,
+  IonIcon,
+  IonButtons,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
+  IonCardSubtitle,
+ } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { library, logoUsd, cashOutline, playCircle, radio, search, searchOutline, closeOutline, checkmarkOutline, arrowBackOutline } from 'ionicons/icons';
 import { Alumno } from 'src/app/interface/alumno';
@@ -17,13 +34,12 @@ import { Profesor } from 'src/app/interface/profesor';;
   templateUrl: './lista-alumnos.page.html',
   styleUrls: ['./lista-alumnos.page.scss'],
   standalone: true,
-  imports: [     IonCardSubtitle,  IonAvatar, IonNote, IonList, IonSelect, IonSelectOption, IonLabel, IonItem,   IonContent, IonIcon, IonButtons, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ]
+  imports: [IonMenuButton, IonCardSubtitle,  IonAvatar, IonNote, IonList, IonSelect, IonSelectOption, IonLabel, IonItem,   IonContent, IonIcon, IonButtons, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ]
 
 })
 export class ListaAlumnosPage implements OnInit {
   id_disciplina: number|undefined;
-  id_alumno:Alumno={}as Alumno;
-  isModalOpen = this.alumnoService.isModalOpen;
+  id_alumno:Alumno={}as Alumno; 
   selectedOrder: string = 'descendente';
   private clase: Clase = {} as Clase;
   private profesor: Profesor={} as Profesor;

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonItem, ModalController,  IonAvatar, IonNote, IonSelect, IonList, IonLabel, IonSelectOption, IonContent,  IonIcon, IonButtons, IonHeader, IonTitle, IonToolbar,  IonCardSubtitle, } from '@ionic/angular/standalone';
+import { IonItem, IonMenuButton, ModalController,  IonAvatar, IonNote, IonSelect, IonList, IonLabel, IonSelectOption, IonContent,  IonIcon, IonButtons, IonHeader, IonTitle, IonToolbar,  IonCardSubtitle, } from '@ionic/angular/standalone';
 import { Location } from '@angular/common';
 import { addIcons } from 'ionicons';
 import { library, logoUsd, cashOutline, playCircle, radio, search, searchOutline, closeOutline, checkmarkOutline, arrowBackOutline } from 'ionicons/icons';
@@ -10,21 +10,19 @@ import { Alumno } from 'src/app/interface/alumno';
 import { Clase } from 'src/app/interface/clase';
 import { Profesor } from 'src/app/interface/profesor';
 import { AlumnoService } from 'src/app/service/alumnoService/alumno.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-listado-cursos',
   templateUrl: './listado-cursos.page.html',
   styleUrls: ['./listado-cursos.page.scss'],
   standalone: true,
-  imports: [IonCardSubtitle,  IonAvatar, IonNote, IonList, IonSelect, IonSelectOption, IonLabel, IonItem,   IonContent, IonIcon, IonButtons, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,]
+  imports: [IonCardSubtitle,  IonAvatar, IonMenuButton, IonList, IonSelect, IonSelectOption, IonLabel, IonItem,   IonContent, IonIcon, IonButtons, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,]
 })
 export class ListadoCursosPage implements OnInit {
-  id_disciplina: number|undefined;
-  id_alumno:Alumno={}as Alumno;
-  isModalOpen = this.alumnoService.isModalOpen;
-  selectedOrder: string = 'descendente';
-  private clase: Clase = {} as Clase;
-  private profesor: Profesor={} as Profesor;
+  private activatedRoute = inject(ActivatedRoute);
+  id_disciplina: number|undefined;   
+  selectedOrder: string = 'descendente';    
   cursos: Curso[] = [];
 
 
@@ -54,12 +52,10 @@ export class ListadoCursosPage implements OnInit {
     }
   }
 
-  pagAtras() {
-    this.location.back();
-  }
-
   private obtencionDatos(){
-   
+    const dato=  this.activatedRoute.snapshot.paramMap.get('id') as string;
+    this.id_disciplina=parseInt(dato);
+   this.cursos=this.alumnoService.getCursos().filter(curso=>curso.id_disciplina===this.id_disciplina);
     
   }
 
@@ -69,9 +65,6 @@ export class ListadoCursosPage implements OnInit {
   }
     
 
-  getClase() {
-    return this.clase;
-  }
   async fichaCurso() {
     const modal = await this.modalCtrl.create({
       componentProps: {

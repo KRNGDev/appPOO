@@ -1,6 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute,RouterLink, RouterLinkActive } from '@angular/router';
-import{ListadoComponent} from 'src/app/componente/listado/listado.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ModalController, IonAvatar,IonItem,IonCard ,IonCardContent,IonCardHeader,IonCardSubtitle,IonCardTitle,IonIcon,IonNote, IonList,IonLabel, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent } from '@ionic/angular/standalone';

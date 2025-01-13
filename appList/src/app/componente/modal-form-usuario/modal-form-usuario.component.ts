@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import {
   ModalController,
   ActionSheetController,
+  IonIcon,
+  IonList,
   IonSelect,
   IonSelectOption,
   IonModal,
@@ -19,13 +21,16 @@ import {
 } from "@ionic/angular/standalone";
 import { Pago } from 'src/app/interface/pago';
 import { AlumnoService } from 'src/app/service/alumnoService/alumno.service';
+import { Alumno } from 'src/app/interface/alumno';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-modal-form-pago',
-  templateUrl: './modal-form-pago.component.html',
-  styleUrls: ['./modal-form-pago.component.scss'],
+  selector: 'app-modal-form-usuario',
+  templateUrl: './modal-form-usuario.component.html',
+  styleUrls: ['./modal-form-usuario.component.scss'],
   standalone: true,
-  imports: [   
+  imports: [
+    IonModal,
     FormsModule,
     IonSelect,
     IonSelectOption,
@@ -40,23 +45,18 @@ import { AlumnoService } from 'src/app/service/alumnoService/alumno.service';
     CommonModule,
     IonContent]
 })
-export class ModalFormPagoComponent implements OnInit {
-  @Input() id_alumno!: number;
-  pago: Pago = {} as Pago;
-  presentingElement!: HTMLElement | null;
-  today: string | undefined;
-  pagado: boolean = false;
 
+export class ModalFormUsuarioComponent implements OnInit {
+  alumno:Alumno={}as Alumno;
 
   constructor(
     private modalCtrl: ModalController,
     private actionSheetCtrl: ActionSheetController,
-    private datosService: AlumnoService) { }
+    private datosService: AlumnoService,
+    private router: Router) { }
 
-  ngOnInit() {
-    this.presentingElement = document.querySelector('.ion-page');
-    this.today = new Date().toISOString().split('T')[0];
-  }
+  ngOnInit() { }
+
   canDismiss = async () => {
 
     const actionSheet = await this.actionSheetCtrl.create({
@@ -80,22 +80,22 @@ export class ModalFormPagoComponent implements OnInit {
 
     return role === 'confirm';
   };
+
+  submit(alumno:Alumno){
+    alumno.id=this.datosService.getAlumnos().length+1;
+    alumno.mca_pago=false;
+    alumno.asistencia=0;
+    alumno.codigo_clase='KENLM';
+    alumno.imagen = 'https://ionicframework.com/docs/img/demos/avatar.svg';
+    console.log(alumno);
+    this.datosService.setAlumnos(alumno);
+    this.router.navigate(['/lista-alumnos']);
+    this.cancel();
+  }
+
   cancel() {
     return this.modalCtrl.dismiss(null, 'cancel');
   }
 
-  confirm() {
-    return this.modalCtrl.dismiss(this.pago, 'confirm');
-  }
 
-
-  submitPago(pago: Pago) {
-    pago.id_alumno = this.id_alumno;
-    pago.id = this.datosService.getPagos().length + 1;
-
-    this.datosService.setPagos(pago);
-    this.pagado = true;
-    this.confirm();
-
-  }
 }

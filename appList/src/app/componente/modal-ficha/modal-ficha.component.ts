@@ -1,11 +1,45 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ModalController, ActionSheetController, IonInput, IonList, IonCardSubtitle, IonItem, IonCardTitle, IonCardHeader, IonCardContent, IonCard, IonLabel, IonAvatar, IonChip, IonButtons, IonIcon, IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonModal } from '@ionic/angular/standalone';
+import {
+  ModalController,
+  ActionSheetController,
+  IonList,
+  IonCardSubtitle,
+  IonItem,
+  IonCardTitle,
+  IonCardHeader,
+  IonCardContent,
+  IonCard,
+  IonLabel,
+  IonAvatar,
+  IonButtons,
+  IonIcon,
+  IonContent,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
+  IonButton
+} from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { trophyOutline,listOutline, arrowBackOutline, cashSharp, callOutline, mailOutline, personOutline, calendarOutline, locationOutline, schoolOutline, timeOutline, cashOutline, closeCircle } from 'ionicons/icons';
+import {
+  trophyOutline,
+  listOutline,
+  arrowBackOutline,
+  cashSharp,
+  callOutline,
+  mailOutline,
+  personOutline,
+  calendarOutline,
+  locationOutline,
+  schoolOutline,
+  timeOutline,
+  cashOutline,
+  closeCircle,
+  createSharp,
+  happyOutline
+} from 'ionicons/icons';
 import { GraficaCircularComponent } from 'src/app/componente/grafica-circular/grafica-circular.component';
-import { ActivatedRoute } from '@angular/router';
 import { Alumno } from 'src/app/interface/alumno';
 import { AlumnoService } from 'src/app/service/alumnoService/alumno.service';
 import { ModalFormPagoComponent } from 'src/app/componente/modal-form-pago/modal-form-pago.component';
@@ -17,13 +51,31 @@ import { Grados } from 'src/app/interface/grados';
   templateUrl: './modal-ficha.component.html',
   styleUrls: ['./modal-ficha.component.scss'],
   standalone: true,
-  imports: [IonModal, IonButton, IonContent, IonInput, IonList, GraficaCircularComponent, IonCardSubtitle, IonItem, IonCardTitle, IonCardHeader, IonCardContent, IonCard, IonLabel, IonAvatar, IonChip, IonIcon, IonButtons, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonButton,
+    IonContent,
+    IonList,
+    GraficaCircularComponent,
+    IonCardSubtitle,
+    IonItem,
+    IonCardTitle,
+    IonCardHeader,
+    IonCardContent,
+    IonCard,
+    IonLabel,
+    IonAvatar,
+    IonIcon,
+    IonButtons,
+    IonHeader,
+    IonTitle,
+    IonToolbar,
+    CommonModule,
+    FormsModule]
 })
-export class ModalFichaComponent  implements OnInit {
+export class ModalFichaComponent implements OnInit {
   @Input() id_alumno!: number;
   private alumno: Alumno | undefined;
   presentingElement!: HTMLElement | null;
-  private grado: Grados={} as Grados;
+  private grado: Grados = {} as Grados;
 
   constructor(
     private modalCtrl: ModalController,
@@ -32,6 +84,8 @@ export class ModalFichaComponent  implements OnInit {
     private alumnoService: AlumnoService
   ) {
     addIcons({
+      createSharp,
+      happyOutline,
       arrowBackOutline,
       trophyOutline,
       listOutline,
@@ -46,14 +100,14 @@ export class ModalFichaComponent  implements OnInit {
       cashOutline,
       personOutline,
     });
-   
-    
+
+
   }
 
   private initialize() {
     this.asignar();
     this.pagosDelMes();
-    this.grado=this.alumnoService.getGrados().filter(grado=> grado.id_alumno== this.alumno?.id)[0];
+    this.grado = this.alumnoService.getGrados().filter(grado => grado.id_alumno == this.alumno?.id)[0];
   }
 
   async formPago() {
@@ -129,6 +183,30 @@ export class ModalFichaComponent  implements OnInit {
     await actionSheet.present();
   }
 
+  async actionSheetOpciones() {
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: 'Opciones',
+      buttons: [
+        {
+          text: `Editar Alumno`,
+          icon: 'create-sharp',
+          handler: () => {
+           
+          },
+        },
+        {
+          text: `Eliminar contacto`,
+          icon: 'close-circle',
+          handler: () => {
+           
+          },
+        },
+        
+      ],
+    });
+    await actionSheet.present();
+  }
+
   private asignar() {
     this.alumno = this.alumnoService
       .getAlumnos()
@@ -175,10 +253,10 @@ export class ModalFichaComponent  implements OnInit {
   getAlumno() {
     return this.alumno;
   }
-  getGrado(){
+  getGrado() {
     return this.grado;
   }
- 
+
   updateAsistencia(event: any) {
     if (this.alumno) {
       this.alumno.asistencia = event;
