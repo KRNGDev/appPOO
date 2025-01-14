@@ -30,10 +30,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./modal-form-usuario.component.scss'],
   standalone: true,
   imports: [
-    IonModal,
     FormsModule,
-    IonSelect,
-    IonSelectOption,
     IonItem,
     IonInput,
     IonLabel,

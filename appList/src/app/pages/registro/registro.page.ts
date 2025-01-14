@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
@@ -28,8 +27,6 @@ import { FormCursoComponent } from 'src/app/componente/Modal/form-curso/form-cur
   standalone: true,
   imports: [
     IonLabel,
-    RouterLink,
-    RouterLinkActive,
     IonIcon,
     IonItem,
     IonList,

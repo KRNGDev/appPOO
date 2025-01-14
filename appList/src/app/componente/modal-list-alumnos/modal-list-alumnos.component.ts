@@ -16,11 +16,27 @@ import { Clase } from 'src/app/interface/clase';
   templateUrl: './modal-list-alumnos.component.html',
   styleUrls: ['./modal-list-alumnos.component.scss'],
   standalone: true,
-  imports: [IonCardSubtitle, IonCard, IonAvatar, IonNote, IonList, IonSelect, IonSelectOption, IonLabel, IonItem, RouterLink, RouterLinkActive, IonContent, IonMenuButton, IonIcon, IonButtons, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [
+    IonCardSubtitle,    
+    IonAvatar,
+    IonNote,
+    IonList,
+    IonSelect,
+    IonSelectOption,
+    IonLabel,
+    IonItem,
+    RouterLinkActive,
+    IonContent,
+    IonIcon, IonButtons,
+    IonHeader,
+    IonTitle,
+    IonToolbar,
+    CommonModule,
+    FormsModule]
 
 })
 export class ModalListAlumnosComponent implements OnInit {
-@Input() codigo_clase!:string;
+  @Input() codigo_clase!: string;
   selectedOrder: string = 'ascendente';
   private clase: Clase = {} as Clase;
   alumnos: Alumno[] = [];
@@ -72,7 +88,7 @@ export class ModalListAlumnosComponent implements OnInit {
     return this.modalCtrl.dismiss(null, 'cancel');
   }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
     this.alumnos = this.alumnoService.getAlumnos().filter(alumno => alumno.codigo_clase === this.codigo_clase);
     this.clase = this.alumnoService.getClases().filter(clase => clase.codigo === this.codigo_clase)[0];
     this.sortList();

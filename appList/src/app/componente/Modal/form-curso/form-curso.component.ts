@@ -38,8 +38,6 @@ import { Profesor } from 'src/app/interface/profesor';
     IonList,
     IonIcon,
     FormsModule,
-    IonSelect,
-    IonSelectOption,
     IonItem,
     IonInput,
     IonLabel,

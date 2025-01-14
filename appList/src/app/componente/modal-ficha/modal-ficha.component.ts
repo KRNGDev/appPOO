@@ -51,7 +51,7 @@ import { Grados } from 'src/app/interface/grados';
   templateUrl: './modal-ficha.component.html',
   styleUrls: ['./modal-ficha.component.scss'],
   standalone: true,
-  imports: [IonButton,
+  imports: [
     IonContent,
     IonList,
     GraficaCircularComponent,
@@ -59,7 +59,6 @@ import { Grados } from 'src/app/interface/grados';
     IonItem,
     IonCardTitle,
     IonCardHeader,
-    IonCardContent,
     IonCard,
     IonLabel,
     IonAvatar,

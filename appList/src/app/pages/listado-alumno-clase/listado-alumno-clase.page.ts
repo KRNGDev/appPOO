@@ -16,11 +16,28 @@ import { Clase } from 'src/app/interface/clase';
   templateUrl: './listado-alumno-clase.page.html',
   styleUrls: ['./listado-alumno-clase.page.scss'],
   standalone: true,
-  imports: [IonCardSubtitle,  IonAvatar, IonNote, IonList, IonSelect, IonSelectOption, IonLabel, IonItem, RouterLink, RouterLinkActive, IonContent, IonMenuButton, IonIcon, IonButtons, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [
+    IonCardSubtitle,
+    IonAvatar,
+    IonNote,
+    IonList,
+    IonSelect,
+    IonSelectOption,
+    IonLabel,
+    IonItem,
+    RouterLinkActive,
+    IonContent,
+    IonIcon,
+    IonButtons,
+    IonHeader,
+    IonTitle,
+    IonToolbar,
+    CommonModule,
+    FormsModule]
 
 })
 export class ListadoAlumnoClasePage implements OnInit {
-  codigo_clase!:string;
+  codigo_clase!: string;
   selectedOrder: string = 'ascendente';
   private clase: Clase = {} as Clase;
   alumnos: Alumno[] = [];
@@ -73,8 +90,8 @@ export class ListadoAlumnoClasePage implements OnInit {
 
   }
 
-  ngOnInit(): void {   
-    this.codigo_clase=this.activatedRoute.snapshot.paramMap.get('id') as string;
+  ngOnInit(): void {
+    this.codigo_clase = this.activatedRoute.snapshot.paramMap.get('id') as string;
     this.alumnos = this.alumnoService.getAlumnos().filter(alumno => alumno.codigo_clase === this.codigo_clase);
     this.clase = this.alumnoService.getClases().filter(clase => clase.codigo === this.codigo_clase)[0];
     this.sortList();
